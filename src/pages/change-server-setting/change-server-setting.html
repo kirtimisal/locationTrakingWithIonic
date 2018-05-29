@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+
+        <ion-title>Authentication</ion-title>
+
+
+    </ion-navbar>
+
+</ion-header>
+<ion-content padding class="change-setting-body entry-form">
+
+    <div class="change-setting-container">
+
+        <form [formGroup]="authPinForm" (ngSubmit)="checkAuthPin(authPinForm.value)">
+            <ion-item>
+                <ion-label stacked>Authentication PIN</ion-label>
+                <ion-input formControlName="authPin" type="text"></ion-input>
+            </ion-item>
+
+            <!-- <div class="text-right">
+                <a href="">Cancel</a>
+            </div> -->
+
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <button class="cancel-btn" type="button" (click)="cancelPage()" ion-button round> Cancel
+                        </button>
+                    </ion-col>
+                    <ion-col col-6>
+                        <button class="save-btn" [disabled]="!authPinForm.valid" type="submit" ion-button round> Save
+                        </button>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-6>
+                        <button class="save-btn" (click)="changeAppKey()" type="button" ion-button round> Change App Key
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+
+
+        </form>
+
+    </div>
+
+
+</ion-content>

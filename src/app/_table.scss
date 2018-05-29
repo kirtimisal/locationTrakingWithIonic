@@ -1,0 +1,58 @@
+
+@import 'variables';
+@import 'mixinBlock';
+table {
+    width:100%;
+    background: $white;
+    thead {
+        @include global-gradient-secondary(90deg);
+        color:$z-black;
+        font-weight: 600 !important;
+    }
+    
+    th{
+        font-weight: 500 !important;
+        padding: 3px 5px;
+        text-align: center;
+        border: 1px solid #828282;
+    }
+    td {
+        font-weight: normal !important;
+        padding: 3px 5px;
+        // text-align: center;
+        border: 1px solid #ccc;
+        color: $text-grey-dark;
+   
+        ion-input{
+            .text-input-md, .datetime-text{
+                border: 1px solid #ccc !important;
+                font-size: 1.5rem;
+                font-weight: 500;
+                margin: 0px;
+                width: 100%;
+                padding: .3rem 0.5rem;
+       }
+            .text-input-ios, .datetime-text{
+                border: 1px solid #ccc !important;
+                font-size: 1.5rem;
+                font-weight: 500;
+                margin: 0px;
+                width: 100%;
+                padding: .3rem 0.5rem;
+       }
+        }
+   
+    }
+
+               
+    
+}
+tr:nth-child(even) {
+    background: #edfcff !important;
+}
+.label-md[stacked]{
+    font-size: 1.4rem;
+}
+.label-ios[stacked]{
+    font-size: 1.4rem;
+}

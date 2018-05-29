@@ -1,0 +1,124 @@
+<!--
+  Generated template for the PartyListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+
+  <ion-navbar class="main-page-header">
+    <ion-title class="party-details-title">Party Details</ion-title>
+    <ion-buttons end style="visibility:hidden;">
+      <button ion-button clear icon-only >
+        <ion-icon name="ios-search-outline"></ion-icon>
+      </button>
+      </ion-buttons>
+  </ion-navbar>
+  <div class="sub-header" #subHeader >
+    <ion-row class="profile-grid-section">
+      <ion-col col-12 class="party-name-row">
+        <ion-col col-1>
+          <ion-icon name="ios-person"></ion-icon>
+        </ion-col>
+        <ion-col col-11>
+          <div class="user-value d-inline-block" [style.width]="subHeaderWidth"> {{Details.partyName}}
+          </div>
+        </ion-col>
+      </ion-col>
+      <!-- <ion-col col-5 class="pr-0">
+        <ion-col col-2>
+
+          <ion-icon name="ios-paper-outline"></ion-icon>
+        </ion-col>
+        <ion-col col-10>
+          <span class="user-value">{{Details.partyCode}}
+          </span>
+        </ion-col>
+      </ion-col> -->
+      <ion-col col-5 class="pr-0">
+        <a href="tel:+{{Details.mobile}}" class="anchorText" *ngIf="Details.mobile">
+          <ion-col col-2>
+            <ion-icon name="ios-call"></ion-icon>
+          </ion-col>
+          <ion-col col-10>
+            <span class="user-value">{{Details.mobile}}
+            </span>
+          </ion-col>
+        </a>
+        <a class="anchorText" *ngIf="!Details.mobile">
+          <ion-col col-2>
+            <ion-icon name="ios-call"></ion-icon>
+          </ion-col>
+        </a>
+      </ion-col>
+      <ion-col col-7 class="pl-0">
+        <ion-col col-2>
+          <ion-icon name="ios-pin"></ion-icon>
+        </ion-col>
+        <ion-col col-10>
+          <span class="user-value">{{Details.city}}
+          </span>
+        </ion-col>
+      </ion-col>
+      <ion-col col-12 (click)="openEmailComposer(Details.email)">
+        <ion-col col-2>
+          <ion-icon name="ios-mail"></ion-icon>
+        </ion-col>
+        <ion-col col-10>
+          <span class="user-value">{{Details.email}}
+          </span>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!-- <d   `111iv style="margin-top:12rem"></div> -->
+  <ion-toolbar class="plain-bg">
+    <div id="container">
+      <div id="arrowL" (click)="backToStart()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </div>
+      <div id="arrowR" (click)="scrollToRight()">
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </div>
+      <ion-scroll #scroll scrollX="true" class="SliderWrapper">
+        <div>
+          <button type="button" ion-button small id="btn_{{i}}" [hidden]="i==0" *ngFor="let item of partyDetails;let i = index" [attr.data-index]="i"
+            [ngClass]="{'activeButton': activebutton == i }" clear class=" tabs-btn" (click)="selectTab(i)" value="{{item.heading}}">
+            {{item.heading}}</button>
+
+        </div>
+      </ion-scroll>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-wrapper" >
+  <div [ngSwitch]="activebutton">
+    <div *ngFor="let items of partyDetails;let i = index">
+
+      <div *ngSwitchCase="i">
+        <div class="card-sec" *ngFor="let item of items.values;let j = index" [hidden]="items.values.length==0">
+          <ion-row class="item-nm item-row" *ngFor="let subItem of item" [hidden]="subItem.heading=='ROWID'" [ngClass]="{'activeAmt': subItem.heading=='Basic Rate' || subItem.heading=='Total Amt' }">
+            <ion-col col-5>
+              <label>{{subItem.heading}} </label>
+              <label style="float:right">:</label>
+            </ion-col>
+            <ion-col col-7>
+              <span class="form-value">{{subItem.value}}
+              </span>
+            </ion-col>
+          </ion-row>
+
+        </div>
+        <div class="card-sec" *ngIf="items.values.length==0">
+          <ion-row class="NoRecordWarning" >
+            <label>Data Not Available</label>
+          </ion-row>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

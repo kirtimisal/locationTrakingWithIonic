@@ -1,0 +1,36 @@
+page-location-tracking {
+    table {
+        & tr {
+            & th,
+            & td {
+                width: 25%;
+                padding: 8px 3px;
+            }
+        }
+    }
+    .locationPopulatedTable{
+        td{
+            & input{
+                width:100%;
+                border: 1px solid rgb(210, 210, 210);
+            }
+            & img{
+                width:60px;
+            }
+            & ion-icon{
+                color: $blue-color;
+            }
+        }
+    }
+    .btn-outer button{
+        padding: 1.5em 3em !important;
+        width: 100%;
+    }
+    // .input-has-focus .label-md[stacked]{
+    //     color:rgb(0, 225, 255);
+    // }
+    
+    .input-has-focus ion-input{
+        color:$text-grey-dark;
+    }
+}

@@ -1,0 +1,18 @@
+page-forceNotif {
+    ion-modal{
+
+    .modal-wrapper {
+    width: 90%;
+    z-index: 10;
+    height: 36.5%;
+    margin-left: 5%;
+    contain: strict;
+    margin-top: 35%;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+    }
+.global-btn{
+    @extend %global-btn;
+}
+    
+}

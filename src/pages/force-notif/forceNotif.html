@@ -1,0 +1,54 @@
+<ion-header>
+        <ion-navbar>
+    
+            <ion-title>Notifications</ion-title>
+        </ion-navbar>
+    </ion-header>
+    
+    <ion-content class="forceNotifContent">
+    
+        <div *ngFor="let notif of forceNotifList">
+            <ion-item class="main-item">
+                <!-- <div> -->
+                <ion-grid CLASS="notif-grid">
+                    <ion-row>
+                        <ion-col col-2>
+                            <label>
+                                {{notif.col6}}
+                            </label>
+                        </ion-col>
+                        <ion-col col-10 class="text-grey-light">
+                            <div [innerHTML]="notif.col5" >
+                                <!--<div-->
+                                <!--{{notif.col5}}-->
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+    
+    
+                <!-- </div> -->
+            </ion-item>
+        </div>
+        <div *ngIf="notificationList">
+            <div class="card" *ngFor="let notification of notificationList">
+                <div style="border-bottom:1px solid grey;border-color: #ddd;">
+                    {{notification.title}}
+                </div>
+                <div (click)="openLink(notification.link)">
+                    <div>
+                        {{notification.msgBody}}
+                    </div>
+                    <div>
+                        <button class="button " (click)="openlink(notification)">Open</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-outer">
+            <button ion-button round class="global-btn" (click)="saveFlag()">Ok</button>
+        </div>
+    
+    
+    
+    </ion-content>

@@ -1,0 +1,46 @@
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>appkeyValidation</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label color="primary" floating>Enter App-key</ion-label>
+    <ion-input [(ngModel)]="appkey"></ion-input>
+  </ion-item>
+  <button ion-button color="secondary" (click)='save(appkey)' >Enter</button>
+</ion-content> -->
+
+<ion-content>
+  <div class="app-key-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-sm-8 padding class="primaryTextColor  text-center">
+          <img class="lhs-logo" src="assets/imgs/lhs-logo.png">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="form-section">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-1 col-sm-2></ion-col>
+          <ion-col col-10 col-sm-8>
+            <ion-item>
+              <ion-icon name="md-key" item-start class="text-orange"></ion-icon>
+              <ion-input type="text" placeholder="Enter App-key" [(ngModel)]="appkey"></ion-input>
+          </ion-item>
+
+
+            <div class="btn-outer">
+              <button ion-button class="global-btn" (click)='save(appkey)' round>Enter</button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

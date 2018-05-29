@@ -1,0 +1,75 @@
+
+<ion-header>
+
+    <ion-navbar>
+      <ion-buttons left>
+        <button (click)="closeLov()" class="back-button-custom" ion-button icon-only large start>
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>{{l_data.lovHeading}}</ion-title>
+      <ion-buttons end *ngIf="item_help_property == 'M'" class="ok-btn">
+        <button class="multiselect-lov-ok-btn" ion-button (click)="setmultiLOVvalue(l_lov)" outline small>
+          Ok
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-list class="search-item-list">
+    <ion-item class="search-item">
+      <ion-input type="text" placeholder="Search" [(ngModel)]="searchText" class="text-grey-dark"></ion-input>
+      <ion-icon name="ios-close-outline" item-end (click)="searchText=''"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-content padding>
+    <div style="overflow-x: auto">
+    <table *ngIf="item_help_property == 'L'">
+      <thead>
+        <tr>
+          <th class="check-outer">
+            <b>Code</b>
+          </th>
+          <th class="label-outer">
+            <b>Name</b>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of l_lov | searchFilter: 'name' : searchText" (click)='setLOVValues(item)'>
+          <td class="check-outer">{{item.code }}</td>
+          <td class="label-outer">{{item.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  
+    <div style="overflow-x: auto">
+      
+    <table *ngIf="item_help_property == 'M'">
+      <tbody>
+        <tr *ngFor="let item of l_lov | searchFilter: 'name' : searchText">
+          <td class="check-outer paddingOuter">
+              <ion-item class="ionMultipleSelect">
+                  <ion-label > {{item.name}} <b>&nbsp; | &nbsp;</b>{{item.code}} </ion-label>
+                  <ion-checkbox color="secondary" [(ngModel)]="item.checked"></ion-checkbox>
+                </ion-item>
+          </td>
+          <!-- <td class="label-outer">
+            <label> {{item.name}}
+              <b>&nbsp; | &nbsp;</b>{{item.code}}</label>
+  
+          </td> -->
+          <!-- <ion-item class="check-outer">
+              <ion-label > {{item.name}} <b>&nbsp; | &nbsp;</b>{{item.code}} </ion-label>
+              <ion-checkbox color="secondary" [(ngModel)]="item.checked"></ion-checkbox>
+            </ion-item> -->
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  </ion-content>

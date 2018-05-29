@@ -1,0 +1,58 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>offlineEntryList</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="entryListContent" padding>
+  <ion-list class="main-cards-item">
+    <ng-container *ngIf="listOfEntries">
+      <ion-item class="notif-items" *ngFor="let items of listOfEntries; let i = index">
+        <ion-grid>
+          <ion-row *ngFor="let item of items" (click)="getEntryDetails(items)">
+            <ion-col *ngIf="item.column_type =='DATE' || item.column_type =='DATETIME'" col-6>
+              <label>{{item.column_desc}}</label>
+            </ion-col>
+            <ion-col *ngIf="item.column_type =='DATE' || item.column_type =='DATETIME'" col-6>
+              <span>
+                : {{ item.value }}
+              </span>
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="border-top:1px solid rgb(235, 235, 235)">
+            <ion-col>
+              <div class="menu-bottom">
+
+                <ion-col (click)="uploadEntry(items,i);" *ngIf="flagForUploadButton=='UP#'">
+                  <div class="msg-box">
+                    <ion-icon ios="ios-mail-open" md="ios-mail-open"></ion-icon>Upload
+                  </div>
+                </ion-col>
+                <ion-col (click)="uploadAllEntry();" *ngIf="flagForUploadAllButton=='UPA#'">
+                  <div class="msg-box">
+                    <ion-icon ios="ios-archive" md="md-archive"></ion-icon>Upload All
+                  </div>
+                </ion-col>
+                <ion-col (click)="openUpdateEntry(items,i);" *ngIf="flagForUpdateButton=='U#'" >
+                  <div class="msg-box">
+                    <ion-icon name="ios-create"></ion-icon>Update
+                  </div>
+                </ion-col>
+                <ion-col (click)="deleteEntry(items,i);">
+                  <div class="msg-box">
+                    <ion-icon name="md-trash"></ion-icon>Delete
+                  </div>
+                </ion-col>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

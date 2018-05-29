@@ -1,0 +1,80 @@
+page-types-of-approval {
+    .approval-wrapper{
+        ion-item{
+            padding-left: 0.8rem;
+            // border-left: 4px solid $green-color;
+            margin-bottom: 1.2rem;
+            box-shadow:0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+            .item-inner{
+                border-bottom: none !important;
+            }
+            ion-badge{
+                @include global-gradient-secondary(45deg);
+                margin-right: -1rem !important;
+                padding: 0.5rem 1rem !important;
+                border-radius: 0;
+              
+}
+
+            .label-md {
+                font-size: 1.5rem;
+            }
+
+           
+        }
+
+        .approval-type{
+            margin-bottom: 0.5rem;
+            .badge{
+                border-radius: 3px !important;
+                padding: 3px 5px;
+                font-size: 1rem;
+                background:$secondary-color;
+                position: absolute;
+                top:4px;
+            }
+
+            .segment-button{
+                
+                color: $text-grey-dark;
+            }
+
+            .segment-activated{
+                border-color: #15b9a3;
+                @include global-gradient-secondary(45deg);
+                color: #FFF;
+             text-align: center;
+          border-radius: 6px 6px 0px 0px;
+            }
+        }
+        
+    }
+    .fabButton{
+        position: absolute;
+        z-index: 999;
+        bottom: 20px !important;
+        right: 20px !important;
+        width: 46px !important;
+        height: 46px !important;
+        line-height: 46px !important;
+        /* background: #FE3F80 !important; */
+        color: #fff;
+    
+        ion-fab-list{
+            margin: 40px 0 !important;
+        }
+    }
+    .NoRecordWarning{
+        color: #B9A247; font-size:17px; text-align:center; 
+    }
+
+    .segment-ios .segment-button{
+        border:none;
+    }
+
+    .add-fab-btn{
+        @include global-gradient-primary(180deg);
+        
+    }
+
+}

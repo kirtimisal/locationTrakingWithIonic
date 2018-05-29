@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="ios-menu-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons (click)="openNotification()" end>
+      <button ion-button icon-only clear>
+        <ion-icon name="ios-notifications-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div class="user-details text-center">
+      <!-- <ion-icon name="ios-contact-outline"></ion-icon> -->
+      <a [innerHTML]="welcomeMsg"></a>
+      <p class="text-center entity-row">
+        <label>Entity </label>
+        <label>: {{entity_code}}</label>
+
+      </p>
+    </div>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="dashboard-wraper" padding>
+  <!-- <div class="item">
+
+    <p [innerHTML]="welcomeMsg" style="text-align:left"> </p>
+  </div> -->
+  <div *ngIf="dashboradData">
+    <div *ngFor="let item of dashboradData">
+      <ion-item class="main-item" *ngIf="item.status=='T'">
+        <!-- <img src="assets/imgs/fabric.png" alt="" item-start *ngIf="!item"> -->
+        <div (click)="pageDetails(item)" class="img-wrapper-dash d-inline-block" item-start>
+          <img [src]="'data:image/jpeg;base64,'+item.image" alt="" />
+        </div>
+        <ion-badge class="main-badge" color="danger" *ngIf="item.reportCount !='0'" (click)="pageDetails(item)">{{item.reportCount}}</ion-badge>
+        <p (click)="pageDetails(item)"> {{ item.table_desc }}</p>
+        <ion-icon (click)="entryList(item.table_name,item.seqNo,item.portlet_Id,item.table_desc,item.data_UPLOAD, item.updation_process, item.screen_orientation_view, item.default_populate_data,item.firstScreen)"
+          class="offline-entry-icon" name="ios-download-outline" *ngIf="item.noOfEntry && item.noOfEntry !='0'" item-end>
+          <ion-badge color="danger">{{item.noOfEntry}}</ion-badge>
+        </ion-icon>
+      </ion-item>
+    </div>
+  </div>
+
+
+
+  <!--One Dashboard Tab navigate to details Logic-->
+  <div *ngIf="flagForOneTab==1">
+    <div class="report-analysis-container-main ">
+      <div class="report-analysis-inner-sec " *ngFor="let item of graphTab ">
+        <div class="row " *ngIf="flagForShortReportTab!=1 ">
+          <div class="col col-100 ">
+            <div class="report-analysis-icon " (click)="openReportAnalysis(item.seq_no,item.tab) ">
+              <span class="report-analysis-icon-inner ">
+                <!-- <img ng-src="data:image/jpeg;base64,{{item.dp}} "> -->
+                <img [src]="'data:image/jpeg;base64,'+item.dp">
+                <b ng-init="item.status=t rue ">{{item.first_screen_1_value}}</b>
+              </span>
+            </div>
+            <div class="report-analysis-heading ">
+              <h2 (click)="openReportAnalysis(item.seq_no,item.tab) ">{{item.tab}}</h2>
+              <div class="last-login-details " ng-init="item.status=true ">
+                <h2 ng-show="!shortReportProcess " (click)="refreshSummaryValue(item.seq_no,item.tab) ">
+                  <i class="icon ion-loop "></i> {{item.lastupdate}}</h2>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="report-analysis-inner-sec " *ngFor="let item of typeList " (click)="openShortReportDetail(item.seq_no,item.tab)">
+        <div class="row " *ngIf="flagForShortReportTab==1">
+          <div class="report-analysis-icon ">
+            <span class="report-analysis-icon-inner ">
+              <img [src]="'data:image/jpeg;base64,'+item.dp">
+              <!-- <img ng-src="data:image/jpeg;base64,{{item.dp}} "> -->
+            </span>
+          </div>
+          <div class="report-analysis-heading ">
+            <h2>{{item.tab}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row " *ngIf="dashboradData==''" style="color: #B9A247; font-size:17px; text-align:center; ">
+    <div class="col">
+      Data is not available for selected app type
+    </div>
+  </div>
+  <ion-fab class="fabButton">
+    <!-- <button ion-fab ion-fab mini class="add-fab-btn"> <ion-icon name="add"></ion-icon></button> -->
+    <!-- <ion-fab-list side="top"> -->
+    <button ion-fab color="danger" ion-fab mini class="add-fab-btn" (click)="refreshDashBoard()">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+
+    <!-- </ion-fab-list> -->
+  </ion-fab>
+  <!--End One Dashboard Tab navigate to details Logic  refreshDashBoard-->
+</ion-content>
+<ion-footer>
+  <p (click)="openWebpage('http://www.lighthouseindia.com/')">Lighthouse Info Systems pvt. Ltd</p>
+</ion-footer>

@@ -1,0 +1,187 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="closePage()" class="back-button-custom" ion-button icon-only large start>
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{reportHeading}}</ion-title>
+    </ion-navbar>
+    <ion-toolbar class="subheader-toolbar">
+        <ion-title>
+            <ion-row class="subheader">
+
+                <ion-col col col-4>
+                    <button (click)="tableView=!tableView;" ion-button class="download-btn" clear end>
+                        <img src="assets/imgs/double-arrow-vertical.png" class="vert-img" *ngIf="tableView">
+                        <img src="assets/imgs/double-arrow.png" class="hori-img" *ngIf="!tableView">
+                    </button>
+                    <span class="display-text" *ngIf='valueFormatData.para_desc'>{{valueFormatData.para_desc}} :</span>
+                </ion-col>
+
+                <ion-col col col-6 class="btn-outer">
+                    <select class="selectDiv" [(ngModel)]="valueFormatVal" (ngModelChange)="changeValueFormat(valueFormatVal);" *ngIf='valueFormatData.dropdownVal'>
+                        <option *ngFor="let item of valueFormatData.dropdownVal" [value]="item.code">{{item.name}}
+                        </option>
+                    </select>
+                </ion-col>
+                <ion-col class="search-icon" col col-2>
+                    <button ion-button class="download-btn" clear end (click)="searchFlag=!searchFlag">
+                        <img src="assets/imgs/search.png" class="search-icon">
+                        <!-- <ion-icon name="search"></ion-icon> -->
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<div class="search-wrapper" *ngIf="searchFlag">
+    <div class="search-main">
+
+        <div class="page-search-sec">
+            <div class="row  text-center">
+                <div class="col pr-0" col-8 col-sm-10>
+                    <div class="list">
+                        <div class="item item-input-inset">
+                            <label class="item-input-wrapper">
+                                <input class="w-100" type="text" placeholder="Search..." [(ngModel)]="searchText">
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col pl-0" col-4 col-sm-2 style="text-align:right">
+                    <button class="button search-section-btn" (click)="searchReport(searchText)">
+                        <ion-icon name="md-search"></ion-icon>
+                    </button>
+                    <button class="button search-section-btn close-search-btn" (click)="ionViewDidLoad();">
+                        <ion-icon name="md-close"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<ion-content padding class="table-content">
+    <div class="search-gap" *ngIf="searchFlag"></div>
+    <!-- <div *ngIf="searchFlag">
+        <div class="row page-search-sec text-center">
+            <div class="col " col-8>
+                <div class="list">
+                    <div class="item item-input-inset">
+                        <label class="item-input-wrapper">
+                            <input class="w-100" type="text" placeholder="Search..." [(ngModel)]="searchText">
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col " col-4 style="text-align:left">
+                <button class="button search-section-btn" (click)="searchReport(searchText)">
+                    <ion-icon name="search"></ion-icon>
+                </button>
+                <button class="button search-section-btn" (click)="ionViewDidLoad();">
+                    <ion-icon name="close"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+    <div *ngIf="tableView" style="overflow-x: auto;" [hidden]="reportDataLength==0">
+        <table>
+            <thead>
+                <tr>
+                    <ng-container *ngFor=" let th of tHeader;let i=index">
+                        <th *ngIf="columnCount>i">
+                            <span class="preSpace">{{th}}</span>
+                        </th>
+                    </ng-container>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor=" let row of reportDetail.tableData;let j=index">
+                    <ng-container *ngFor=" let col of row; let i= index">
+                        <td *ngIf="columnCount>i" [ngStyle]="{'text-align':rightAlign[i]}">
+                            <span *ngIf="hashIndex[i]" class="hashIndex" (click)="getPartyDetails(col,j,i)">
+                                {{col}}
+                            </span>
+                            <span *ngIf="!hashIndex[i]" [ngStyle]="{'text-align':rightAlign[i]}">
+                                {{col}}
+                            </span>
+                        </td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="global-btn special-btn load-more-btn ion-button round" (click)="loadMore()" *ngIf="!noMoreData">Load More</button>
+    </div>
+    <ion-card class="NoRecordWarning" *ngIf="reportDataLength==0">
+        <p>
+            Data Not Available
+        </p>
+    </ion-card>
+
+
+    <div style="overflow-x: auto;" *ngIf="!tableView">
+        <div class="table-wrapper">
+            <ion-row [hidden]="horizontalTableData.length==0">
+                <ion-col col-4 class="p-0">
+                    <table class="table-left">
+                        <thead>
+                            <ng-container *ngFor="let th of tHeader ; let i= index">
+                                <tr *ngIf="columnCount>i">
+                                    <th>
+                                        <div class="td-inner">{{th}}</div>
+                                    </th>
+                                </tr>
+                            </ng-container>
+
+                        </thead>
+                    </table>
+                </ion-col>
+
+                <ion-col col-8 class="outer-right p-0">
+                    <table class="table-right">
+                        <tbody>
+                            <ng-container *ngFor="let data2 of horizontalTableData;let i = index">
+                                <tr *ngIf="columnCount>i">
+                                    <td *ngFor="let data3 of data2;let j = index">
+                                        <span *ngIf="hashIndex[i] ==true" class="hashIndex" (click)="getPartyDetails(data3,j,i)">{{data3}}</span>
+                                        <span *ngIf="hashIndex[i] ==false"> {{data3}}</span>
+                                    </td>
+                                    <td [attr.rowspan]='tHeader.length' *ngIf="i==0 && !noMoreData">
+                                        <button class="global-btn special-btn load-more-btn ion-button round vertical-btn" (click)="loadMore()">
+                                            L
+                                            <br>O
+                                            <br>A
+                                            <br>D
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </ion-col>
+            </ion-row>
+
+        </div>
+
+    </div>
+
+    <ion-row class="row" *ngIf="reportDetail.length==0">
+        <ion-col col-12>
+
+            <ion-row class="form-field custom-row">
+                <ion-col col-12>
+                    <label style="color: #adab55;">Data Not Available</label>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-content>

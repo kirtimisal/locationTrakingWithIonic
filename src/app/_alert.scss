@@ -1,0 +1,31 @@
+@import 'variables';
+.alert-md .alert-head{
+    background: $global-gradient !important;
+    color: $bg-white;
+    // padding: 1rem;
+    padding: 0.6rem 1rem;
+    }
+  .alert-md .alert-message{
+    color: $z-black !important;
+    padding-top: 0.7rem !important;
+  }
+  .alert-md .alert-message, .alert-md .alert-input-group{
+    // padding: 0 1.5rem 0rem;
+    // padding: 4rem 1.5rem !important;
+    font-size: 1.4rem;
+  }
+  .alert-md .alert-title {
+    font-size: 1.8rem;
+  }
+  .alert-input-wrapper textarea{
+  border: 1px solid #ccc;
+  }
+  
+  .alert-md .alert-button{
+  color: #0ebbdc !important;
+  padding:0.5rem !important;
+  font-size: 1.3rem;
+  }
+  .alert-md .alert-button-group{
+    padding:0rem !important;
+  }

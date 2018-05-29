@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Entry List</ion-title>
+    <ion-buttons end>
+      <button *ngIf="firstScreen=='M'" ion-button clear icon-only (click)="filterFlag==true?filterFlag=false : filterFlag=true;searchFlag=false">
+        <ion-icon name="ios-funnel"></ion-icon>
+      </button>
+      <button *ngIf="firstScreen=='M'" ion-button clear icon-only (click)="searchFlag==true?searchFlag=false : searchFlag=true;filterFlag=false">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="entryListContent" padding>
+  <ion-card class="filter-section" *ngIf="filterFlag">
+    <ion-card-content>
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div (click)="showDatepicker('from_date')">
+                <ion-row>
+                  <ion-col col-2>
+                    <ion-icon name="ios-calendar" class="calendar-icon"></ion-icon>
+                  </ion-col>
+                  <ion-col col-10>
+                    <ion-input [(ngModel)]="filter.from_date" placeholder="From Date" class="from-date-input"></ion-input>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div (click)="showDatepicker('to_date')" style="border-bottom:none;">
+                <ion-row>
+                  <ion-col col-2>
+                    <ion-icon name="ios-calendar" class="calendar-icon"></ion-icon>
+                  </ion-col>
+                  <ion-col col-10>
+                    <ion-input [(ngModel)]="filter.to_date" placeholder="To Date" class="to-date-input"></ion-input>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button class="global-btn special-btn" small ion-button round (click)="filterEntry(filter.from_date,filter.to_date)">
+                Search
+              </button>
+            </ion-col>
+            <ion-col>
+              <button class="cancel-btn" round small ion-button (click)="loadEntry();filter.to_date='';filter.from_date='';filterFlag=false;">
+                Cancel
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+ </ion-card-content>
+  </ion-card>
+  <ion-card class="search-section" *ngIf="searchFlag">
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-8 class="text-center">
+          <ion-input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchEntity.search"></ion-input>
+        </ion-col>
+        <ion-col col-2 class="text-right">
+          <button ion-button small class="special-btn" (click)="searchEntry(searchEntity.search)">
+            <ion-icon name="search"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button small class="cancel-btn-special" (click)="loadEntry();searchEntity.search='';searchFlag=false">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-list class="main-cards-item">
+    <ng-container *ngIf="listOfEntries">
+      <ion-item class="notif-items" *ngFor="let items of listOfEntries">
+        <ion-grid>
+
+          <ion-row *ngFor="let item of items" (click)="getEntryDetails(items)">
+            <ion-col *ngIf="item.displayFlag =='TRUE'" col-6>
+              <label>{{item.column_desc}}</label>
+
+            </ion-col>
+            <ion-col *ngIf="item.displayFlag =='TRUE'" col-6>
+              <span>
+                : {{ item.value }}
+              </span>
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="border-top:1px solid rgb(235, 235, 235)">
+            <ion-col>
+              <div class="menu-bottom">
+                <ion-col *ngIf="flagForApproveButton=='A#'">
+                  <div class="msg-box">
+                    <ion-icon ios="ios-mail" md="ios-mail"></ion-icon>Approve
+                  </div>
+                </ion-col>
+                <ion-col *ngIf="flagForUploadButton=='UP#'" (click)="uploadEntry(items,index);">
+                  <div class="msg-box">
+                    <ion-icon ios="ios-mail-open" md="ios-mail-open"></ion-icon>Upload
+                  </div>
+                </ion-col>
+                <ion-col *ngIf="flagForUploadAllButton=='UPA#'" (click)="uploadAllEntry();">
+                  <div class="msg-box">
+
+                    <ion-icon ios="ios-archive" md="md-archive"></ion-icon>Upload All
+                  </div>
+                </ion-col>
+                <ion-col *ngIf="flagForUpdateButton=='U#'" (click)="openUpdateEntry(items,index)">
+                  <div class="msg-box">
+
+                    <ion-icon name="ios-create"></ion-icon>Update
+                  </div>
+                </ion-col>
+                <ion-col *ngIf="flagForDeleteButton=='D#'" (click)="deleteEntry(items,index); ">
+                  <div class="msg-box">
+
+                    <ion-icon name="md-trash"></ion-icon>Delete
+                  </div>
+                </ion-col>
+              </div>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-item>
+    </ng-container>
+    <ion-item class="notif-items" *ngIf="entriesLength==0">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+
+            <ion-row>
+              <ion-col col-12>
+                <label style="    color: #adab55;">Data Not Available</label>
+              </ion-col>
+
+            </ion-row>
+
+          </ion-col>
+
+
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+
+  </ion-list>
+
+</ion-content>

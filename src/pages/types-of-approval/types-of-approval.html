@@ -1,0 +1,95 @@
+<!--
+  Generated template for the TypesOfApprovalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar hideBackButton="true">
+    <ion-buttons left>
+      <button class="back-button-custom" (click)="back()" ion-button icon-only large>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{table_desc}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="approval-wrapper">
+
+  <div class="approval-type">
+    <ion-segment [(ngModel)]="approvals">
+      <ion-segment-button value="previous">
+        Previous Approval
+        <!-- <ion-badge>{{approvedCount}}</ion-badge> -->
+      </ion-segment-button>
+      <ion-segment-button value="pending">
+        Pending Approval
+        <!-- <ion-badge>{{unapprovedCount}}</ion-badge> -->
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!-- <div [ngSwitch]="approvals">
+    <ion-list *ngSwitchCase="'previous'">
+      <ion-item>
+        <img alt="" item-start="" src="../../assets/imgs/check-mark.png">
+        <ion-label>
+          Previous Approval
+        </ion-label>
+        <ion-badge item-end>1</ion-badge>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'pending'">
+      <ion-item>
+        <img alt="" item-start="" src="../../assets/imgs/check-mark.png">
+        <ion-label>
+          Pending Approval
+        </ion-label>
+        <ion-badge item-end>1</ion-badge>
+      </ion-item>
+
+    </ion-list>
+  </div> -->
+  <div [ngSwitch]="approvals">
+    <ion-list *ngSwitchCase="'previous'">
+      <!-- <p *ngIf="!listOfErpTypes"></p> -->
+      <ng-container *ngIf="prevlistLengthVal==0">
+        <p class="NoRecordWarning">No More previous Approvals</p>
+      </ng-container>
+      <ion-item *ngFor="let item of listOfPrevErpTypes;" (click)="getListOfAppr(item,approvals)">
+        <img alt="" item-start="" src="assets/imgs/check-mark.png" *ngIf="!item.image">
+        <img alt="" item-start="" [src]="'data:image/jpeg;base64,'+item.image" *ngIf="item.image">
+        <ion-label>
+          {{item.tnatrure_Name}}
+        </ion-label>
+        <ion-badge item-end>{{item.rec_count}}</ion-badge>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'pending'">
+      <!-- <p *ngIf="!listOfErpTypes"></p> -->
+      <ng-container *ngIf="listLengthVal==0">
+        <p class="NoRecordWarning">No More Approvals Pending</p>
+      </ng-container>
+      <ion-item *ngFor="let item of listOfErpTypes;" (click)="getListOfAppr(item,approvals)">
+        <img alt="" item-start="" src="assets/imgs/check-mark.png" *ngIf="!item.image">
+        <img alt="" item-start="" [src]="'data:image/jpeg;base64,'+item.image" *ngIf="item.image">
+        <ion-label>
+          {{item.tnatrure_Name}}
+        </ion-label>
+        <ion-badge item-end>{{item.rec_count}}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-fab class="fabButton " (click)="refreshApprovalList()">
+    <button ion-fab ion-fab mini color="danger" class="add-fab-btn"> <ion-icon name="refresh"></ion-icon></button>
+
+  </ion-fab>
+</ion-content>

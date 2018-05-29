@@ -1,0 +1,70 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+<ion-content padding class="login-ion-content">
+	<ion-grid class="login-outer-padding">
+		<ion-row class="login-outer-padding">
+			<ion-col col-12 class="login-outer-padding">
+
+				<div class="login-outer" [style.height]="shouldHeight">
+					<ion-grid>
+						<ion-row>
+							<ion-col padding class="primaryTextColor ">
+								<img class="lhs-logo" src="assets/imgs/logo-new.png">
+								<h4 class="d-inline-block">LOGIN</h4>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+
+					<form class="loginForm" #form="ngForm">
+
+						<ion-list>
+
+							<ion-item>
+								<ion-icon name="ios-person" item-start></ion-icon>
+								<ion-input type="text" placeholder="Username" [(ngModel)]="loginCredentials.user_code" name="userCode" required></ion-input>
+							</ion-item>
+
+							<ion-item>
+								<ion-icon  name="ios-lock" item-start></ion-icon>
+								<ion-input type="password" placeholder="Password" [(ngModel)]="loginCredentials.password" name="username" required></ion-input>
+							</ion-item>
+
+							<!-- <ion-item class="ip-sec-wrap">
+
+								<ion-icon ios="ios-lock-outline" class="ip-icon" item-start>IP</ion-icon>
+								<ion-input type="number" [maxlength]="3" [(ngModel)]="loginCredentials.ip1" name="ip1" class="ip-sec ip-sec-first"></ion-input>
+								<ion-input type="number" [maxlength]="3" [(ngModel)]="loginCredentials.ip2" name="ip2" class="ip-sec"></ion-input>
+								<ion-input type="number" [maxlength]="3" [(ngModel)]="loginCredentials.ip3" name="ip3" class="ip-sec"></ion-input>
+								<ion-input type="number" [maxlength]="3" [(ngModel)]="loginCredentials.ip4" name="ip4" class="ip-sec"></ion-input>
+
+							</ion-item> -->
+
+							<ion-item class="border-0 forgot-link">
+								<a class="grey-text " (click)="forgotPassword()">Forgot Password?</a>
+							</ion-item>
+
+
+							<ion-item class="login-btn-wrap">
+								<ion-buttons>
+									<button ion-button icon-only round class="login-btn" [disabled]="!form.valid || flagForDisableLoginButton==1" (click)="doLogin()">
+										Login Now
+
+									</button>
+								</ion-buttons>
+							</ion-item>
+
+						</ion-list>
+					</form>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-icon name="ios-settings" md="md-settings" (click)="changeSetting()" class="setting-icon "></ion-icon>
+</ion-content>

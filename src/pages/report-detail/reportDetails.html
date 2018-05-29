@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button (click)="closePage()" class="back-button-custom" ion-button icon-only large start>
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title class="report-detail-title">Report Details</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div class="popover-container">
+        <ion-grid class="entry-form-wrapper">
+            <ion-row class="row" *ngFor="let item of reportValues">
+                <ion-col col-12 [hidden]="item.entry_by_user=='F'" *ngIf="item.value">
+
+                    <ion-row class="form-field custom-row">
+                        <ion-col col-6>
+                            <label>{{item.para_desc}}</label>
+                        </ion-col>
+                        <ion-col col-6>
+                            <span>: {{item.value}}</span>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-col>
+
+
+            </ion-row>
+            <ion-row class="row" *ngIf="valueFlaglength==0" >
+                <ion-col col-12 >
+
+                    <ion-row class="form-field custom-row">
+                        <ion-col col-12>
+                            <label style="    color: #adab55;">Data Not Available</label>
+                        </ion-col>
+                        
+                    </ion-row>
+
+                </ion-col>
+
+
+            </ion-row>
+
+        </ion-grid>
+    </div>
+</ion-content>

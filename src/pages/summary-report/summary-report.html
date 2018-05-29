@@ -1,0 +1,277 @@
+<!--
+  Generated template for the SummaryReportPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Report Analysis</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="search=!search">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<div class="search-wrapper" style="top:4rem" *ngIf="search">
+  <div class="search-main">
+
+    <div class="page-search-sec">
+      <div class="row  text-center">
+        <div class="col pr-0" col-10 col-sm-11>
+          <div class="list">
+            <div class="item item-input-inset">
+              <label class="item-input-wrapper">
+                <input class="w-100" type="text" placeholder="Search..." [(ngModel)]="searchText">
+              </label>
+
+            </div>
+          </div>
+        </div>
+        <div class="col pl-0" col-2 col-sm-1 style="text-align:right">
+          <button class="button search-section-btn close-search-btn" (click)="searchText=''">
+            <ion-icon name="md-close"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<ion-content padding class="entry-form summary-report-content">
+  <div class="search-gap" *ngIf="search"></div>
+  <div class="report-analysis-container-main">
+    <div class="report-analysis-inner-sec" *ngFor="let item of graphTab | searchFilter: 'tab' : searchText">
+      <div class="row" (click)="openReportAnalysis(item.seq_no, item.tab, item.paginationFlag)" *ngIf="firstScreen == 'G'">
+        <div class="report-analysis-icon" *ngIf="item.first_screen_1_value == null">
+          <span class="report-analysis-icon-inner">
+            <!-- <img ng-src="data:image/jpeg;base64,{{item.dp}}"> -->
+            <img [src]="'data:image/jpeg;base64,'+item.dp" *ngIf="item.dp" />
+            <img src="assets/imgs/file.png" *ngIf="!item.dp" />
+          </span>
+        </div>
+        <div class="report-analysis-icon-with-count" *ngIf="item.first_screen_1_value != null">
+          <span class="report-analysis-icon-inner">
+            <b ng-init="item.status = true">{{item.first_screen_1_value}}</b>
+          </span>
+        </div>
+        <div class="report-analysis-heading">
+          <h2>{{item.tab}}</h2>
+        </div>
+      </div>
+
+
+      <div *ngIf="firstScreen != 'G'" id="item_{{item.seq_no}}">
+        <ion-card>
+
+          <ion-card-content>
+
+            <ion-row>
+              <ion-col col-3 class="p-0" *ngIf="item.first_screen_1_value == null" (click)="openReportAnalysis(item.seq_no, item.tab, item.paginationFlag)">
+                <div class="img-rs-outer-primary text-center">
+                  <span>
+                    <img [src]="'data:image/jpeg;base64,'+item.dp" *ngIf="item.dp" />
+                    <img src="assets/imgs/file.png" *ngIf="!item.dp" />
+                  </span>
+                </div>
+              </ion-col>
+              <ion-col col-12 class="p-0" *ngIf="item.first_screen_1_value != null" (click)="openReportAnalysis(item.seq_no, item.tab, item.paginationFlag)">
+                <div class="img-rs-outer-balance text-center">
+                  <span ng-init="item.status = true">{{item.first_screen_1_value}}</span>
+                </div>
+              </ion-col>
+              <ion-col col-12 class="img-rs-outer-sec" *ngIf="item.first_screen_1_value != null">
+                <ion-row>
+                  <ion-col col-10 (click)="openReportAnalysis(item.seq_no, item.tab, item.paginationFlag)">
+                    <label>{{item.tab}}</label>
+                    <div *ngIf="firstScreen != 'G' && firstScreen!='CV'" ng-init="item.status = false">
+                      <div *ngIf="!item.isProcessing">
+                        <input type="text" class="ion-cust-input" *ngIf="item.lastupdate && item.colorVal=='none'" value="{{item.lastupdate}}" [readonly]="isReadonly">{{item.colorVal}}
+                        <input type="text" class="ion-cust-input" *ngIf="item.lastupdate && item.colorVal=='red'" value="{{item.lastupdate}}" style="color:red"
+                          [readonly]="isReadonly">{{item.colorVal}}
+                        <input type="text" class="ion-cust-input" *ngIf="!item.lastupdate" value="Please Refresh" [readonly]="isReadonly">
+                      </div>
+                    </div>
+                  </ion-col>
+                  <ion-col col-2 class="text-right" (click)="refreshSummaryValue(item.seq_no, item.tab)">
+                    <button ion-button icon-only clear>
+                      <ion-icon name="md-refresh" class="report-refresh-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+
+              </ion-col>
+              <ion-col col-9>
+                <div class="card-sec-wrapper">
+                  <div class="left-card-outer" *ngIf="item.first_screen_1_value == null" (click)="openReportAnalysis(item.seq_no, item.tab, item.paginationFlag)">
+                    <label>{{item.tab}}</label>
+                    <div *ngIf="firstScreen != 'G' && firstScreen!='CV'" ng-init="item.status = false">
+                      <div *ngIf="!item.isProcessing">
+                        <input type="text" class="ion-cust-input" *ngIf="item.lastupdate && item.colorVal=='none'" value="{{item.lastupdate}}" [readonly]="isReadonly">
+                        <input type="text" class="ion-cust-input" *ngIf="item.lastupdate && item.colorVal=='red'" value="{{item.lastupdate}}" style="color:red"
+                          [readonly]="isReadonly">
+                        <input type="text" class="ion-cust-input" *ngIf="!item.lastupdate" value="Please Refresh" [readonly]="isReadonly">
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <span class="card-right-outer" *ngIf="!item.isProcessing && firstScreen!='CV'">
+                    <button ion-button icon-only clear (click)="openSlide(item.seq_no, item.status)" *ngIf="item.filter_Flag != 'F' && !item.status">
+                      <ion-icon name="ios-add-circle-outline"></ion-icon>
+                    </button>
+                    <button ion-button icon-only clear (click)="closeSlide(item.seq_no, item.status)" *ngIf="item.filter_Flag != 'F' && item.status">
+                      <ion-icon name="ios-remove-circle-outline"></ion-icon>
+                    </button>
+                    <button ion-button icon-only clear (click)="refreshSummaryValue(item.seq_no, item.tab)" *ngIf="item.filter_Flag == 'F'">
+                      <ion-icon name="ios-refresh"></ion-icon>
+                    </button>
+                  </span>
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <ion-item [ngClass]="{classToHide:dBlock}" class="sectionCal" *ngIf="item.status && fields">
+              <form #form="ngForm">
+                <div class="card-inner-sec" *ngFor="let itemF of fields" [ngSwitch]="itemF.item_help_property">
+
+
+                  <ion-grid *ngSwitchCase="'C'" [hidden]="itemF.entry_by_user=='F'" (click)="showDatepicker(itemF.column_name)">
+                    <ion-row>
+                      <ion-col col-12>
+                        <div class="sec-wrapper">
+                          <label>{{itemF.para_desc}}</label>
+                          <button class="right-align-btn" ion-button icon-only item-end icon-left clear>
+                            <ion-icon name="ios-calendar-outline" class="calendar"></ion-icon>
+                          </button>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-item>
+                        <ion-input [(ngModel)]="itemF.value" id="{{itemF.para_column}}" [readonly]="isReadonly" name="{{itemF.para_column}}" [required]="itemF.nullable=='F'"></ion-input>
+                      </ion-item>
+                    </ion-row>
+                  </ion-grid>
+
+
+                  <div *ngSwitchCase="'L'" [hidden]="itemF.entry_by_user=='F'">
+                    <ion-row>
+                      <ion-col col-12>
+                        <div class="sec-wrapper">
+                          <label (click)="openLov(itemF.para_desc, itemF.para_column, itemF.dependent_row, itemF.dependent_row_logic, itemF.item_help_property)">{{itemF.para_desc}}
+                          </label>
+                          <button class="right-align-btn" ion-button icon-only item-end icon-left clear color="danger" (click)="setLOVValues(itemF)">
+                            <ion-icon name="ios-close"></ion-icon>
+                          </button>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+
+                    <ion-row (click)="openLov(itemF.para_desc, itemF.para_column, itemF.dependent_row, itemF.dependent_row_logic, itemF.item_help_property)">
+                      <ion-col ion-item col-12>
+                        <ion-input placeholder="{{itemF.tool_tip}}" [(ngModel)]="itemF.value" name="{{itemF.para_column}}" (ngModelChange)="dependent_nullable_logic(itemF.value,itemF.column_name,itemF.dependent_column_name)"
+                          id="{{itemF.para_column}}" [readonly]="isReadonly" [required]="itemF.nullable=='F'"></ion-input>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+
+                  <ion-grid *ngSwitchCase="'H'" [hidden]="itemF.entry_by_user=='F' || itemF.hideValueFormat=='true'">
+                    <ion-row>
+                      <ion-col col-12>
+                        <label>{{ itemF.para_desc }}</label>
+                      </ion-col>
+                      <ion-col ion-item col-12>
+                        <select class="w-100" name="{{itemF.para_column}}" [(ngModel)]="itemF.value" [required]="itemF.nullable=='F' ">
+                          <option *ngFor="let option of itemF.dropdownList;" value="{{option.code}}">{{option.name}}</option>
+                        </select>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+
+                  <ion-row *ngSwitchCase="'M'" [hidden]="itemF.entry_by_user=='F'">
+                    <ion-col col-2>
+                      <label>{{itemF.para_desc}}</label>
+                    </ion-col>
+                    <ion-col style="text-align:center;">
+                    </ion-col>
+                    <ion-col ion-item>
+                      <ion-input placeholder="{{itemF.tool_tip}}" [(ngModel)]="itemF.value" clearInput (ngModelChange)="dependent_nullable_logic(itemF.value,itemF.column_name,itemF.dependent_column_name)"
+                        id="{{itemF.column_name}}" name="{{itemF.para_column}}" (click)="openLov(itemF.para_desc, itemF.para_column, itemF.dependent_row, itemF.dependent_row_logic, itemF.item_help_property,itemF.value)"
+                        [readonly]="isReadonly" required="itemF.nullable=='F'"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngSwitchCase="'T'" [hidden]="itemF.entry_by_user=='F'">
+                    <ion-col col-2>
+                      <label>{{itemF.para_desc}}</label>
+                    </ion-col>
+                    <ion-col style="text-align:center;">
+                    </ion-col>
+                    <ion-col ion-item>
+                      <ion-input placeholder="{{itemF.tool_tip}}" [(ngModel)]="itemF.value" clearInput (ngModelChange)="dependent_nullable_logic(itemF.value,itemF.column_name,itemF.dependent_column_name)"
+                        id="{{itemF.column_name}}" name="{{itemF.para_column}}" [readonly]="itemF.entry_by_user == 'R'" required="itemF.nullable=='F'"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngSwitchCase="'N'" [hidden]="itemF.entry_by_user=='F'">
+                    <ion-col col-2>
+                      <label>{{itemF.para_desc}}</label>
+                    </ion-col>
+                    <ion-col style="text-align:center;">
+                    </ion-col>
+                    <ion-col ion-item>
+                      <ion-input type="number" placeholder="{{itemF.tool_tip}}" [(ngModel)]="itemF.value" clearInput (ngModelChange)="dependent_nullable_logic(itemF.value,itemF.column_name,itemF.dependent_column_name)"
+                        id="{{itemF.column_name}}" name="{{itemF.para_column}}" [readonly]="isReadonly" required="itemF.nullable=='F'"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngSwitchCase="'R'" [hidden]="itemF.entry_by_user=='F'">
+                    <ion-col col-2>
+                      <label>{{itemF.para_desc}}</label>
+                    </ion-col>
+                    <ion-col style="text-align:center;">
+                    </ion-col>
+                    <ion-col ion-item>
+                      <ion-checkbox [(ngModel)]="itemF.value" name="{{itemF.para_column}}" (ngModelChange)="toggleRadio(itemF.para_desc, itemF.para_column, itemF.dependent_row)">{{itemF.para_desc}} </ion-checkbox>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngSwitchCase="'D'" [hidden]="itemF.entry_by_user=='F'">
+                    <ion-col col-2>
+                      <label>{{itemF.para_desc}}</label>
+                    </ion-col>
+                    <ion-col style="text-align:center;">
+                    </ion-col>
+                    <ion-col ion-item>
+                      <select [(ngModel)]="itemF.value" name="{{itemF.para_column}}">
+                        <option *ngFor="let option of itemF.dropdownList" value="{{option}}">{{option}}</option>
+                      </select>
+                    </ion-col>
+                  </ion-row>
+
+                </div>
+
+
+                <ion-grid>
+                  <ion-row class="btn-outer">
+                    <ion-col col-3></ion-col>
+                    <ion-col col-6>
+                      <ion-buttons *ngIf="fields">
+                        <button ion-button round class="global-btn" [disabled]="!form.valid" (click)="item.status = !item.status; refreshSummaryValuePara(item.seq_no, item.tab, fields);">Refresh</button>
+                      </ion-buttons>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </form>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

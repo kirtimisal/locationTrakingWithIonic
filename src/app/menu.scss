@@ -1,0 +1,143 @@
+// ----------------menu style ---------------
+.sidebar{
+    .scroll-content{
+        overflow-y: hidden;
+    }
+    .content{ 
+    $url:"../assets/imgs/sidebar.png";
+    background-color: #fff;
+    @include global-bg-image($url,$bg-size-cover)
+}
+.toolbar-title-ios{
+    margin-left: 3.6rem !important;
+}
+.toolbar-title-md{
+    margin-left: 2.5rem !important;
+}
+.toolbar-title{
+color:$text-white;
+font-size: 1.7rem;
+margin-top: 0;
+text-align: left;
+p{
+    -webkit-margin-after: 0.31em;
+    -webkit-margin-before: 0.5em;
+
+}
+@include respond-to(small-screens) {
+    font-size: 1.5rem;
+
+}
+}
+}
+.sidebarContent{
+    .side-list{
+        margin-top: 12em;
+        max-height: 440px !important;
+        overflow-y: auto;
+        @include respond-to(small-screens) {
+            max-height: 220px !important;
+            overflow-y: auto;
+
+        }
+        @include respond-to(medium-screens) {
+            max-height: 330px !important;
+            overflow-y: auto;
+
+        }
+      
+    }
+.select-app-type{
+max-width: 60% !important;
+}
+
+}
+.sidebar-list-icon{
+    color: $text-white;
+    @include global-gradient-secondary(90deg);
+    // background: #c6c6c6;
+    padding: 0.61rem 0.9rem;
+    border-radius: 50%;
+    font-size: 2.2rem !important;
+}
+.lhs-logo-wrapper{
+    background: #fff;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    padding: 1rem;
+    position: absolute;
+    left: 2rem;
+    top: 11rem;
+    box-shadow: 0px 8px 19px rgba(0, 0, 0, 0.01), 0px 6px 10px rgba(0, 0, 0, 0.14);
+    // @include respond-to(small-screens) {
+    //     font-size: 1.5rem;
+    
+    // }
+    @include respond-to(small-screens){
+        top: 10rem;
+    }
+}
+
+.bar-buttons-ios{
+    top: 1em;
+
+}
+.content-md .header-back{
+    top: 0.5em;
+
+}
+.header-back{
+    position: absolute;
+    left: 0em;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input {
+    margin-left: 5px;
+}
+.item-ios ion-icon[item-start] + .item-inner, .item-ios ion-icon[item-start] + .item-input {
+    margin-left: 5px;
+}
+
+// ----------------menu style ---------------
+
+.content-ios .side-list {
+    max-height: 220px !important;
+    overflow-y: auto;
+}
+.content-md .side-list {
+    max-height: 220px !important;
+    overflow-y: auto;
+}
+
+@include respond-to(small-screens){
+    .menu-inner{
+        width:277px;
+    }
+}
+@include respond-to(tablet-screens){
+    .content-md{
+
+        .lhs-logo-wrapper{
+            left: 7rem;
+            top: 13rem;
+        }
+    }
+    
+    .sidebarContent .side-list {
+        margin-top: 16em;
+    }
+
+    .content-ios{
+        .lhs-logo-wrapper{
+            left: 7rem;
+            top: 13rem;
+        }
+    }
+
+
+   
+}

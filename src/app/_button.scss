@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'mixinBlock';
+
+
+%global-btn {
+    @include  global-gradient-primary(to right);
+    width:100%;
+    margin-top: 0.6em;
+   
+}
+.global-btn{
+    @extend %global-btn;
+}
+.special-btn{
+    @include global-gradient-secondary(90deg);
+}
+.save-btn{
+    @include global-gradient-secondary(90deg);
+    margin-top: 0.6em;
+    width:100%;
+}
+.btn-outer {
+    text-align: center !important;
+}
+.back-button.show-back-button {
+    color: $text-white;
+}
+.cancel-btn {
+    @extend %global-btn;
+    background: $text-grey-light !important;
+    &:active {
+        background: $text-grey-dark !important;
+    }
+}
+.bar-button-default,
+.bar-button-clear-default,
+.bar-button-default {
+    color: $bg-white;
+}
+.checkbox .checkbox-icon {
+    border-color: rgba(158, 158, 158, 0.88);
+}
+.checkbox-secondary .checkbox-checked {
+    border-color: transparent;
+    @include global-gradient-secondary(90deg);
+}
+.back-button,.back-button-custom {
+    margin: 4px 6px;
+    color: #fff !important;
+}
+
+.bar-button:first-child{
+    margin-top: 5px;
+}
+.bar-button-ios:first-child{
+    margin-top: 0;
+}
+.bar-buttons-ios {
+    top: 0 !important;
+}

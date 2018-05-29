@@ -1,0 +1,83 @@
+<!--
+  Generated template for the ReportGraphDrilldownPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button (click)="viewCtrl.dismiss()" class="back-button-custom" ion-button icon-only large start>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{graphHeading}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="ChartData">
+
+    <div class="col col-50">
+      <select class="selectDiv" [(ngModel)]="selectedChart" style="background: linear-gradient(360deg, #10cef3, #1af1c9) !important;">
+        <option *ngFor="let item of graphTypeList" [value]="item">{{item}}
+        </option>
+        <!-- <option value="Horizontal bar chart">Horizontal Bar Chart</option> -->
+      </select>
+    </div>
+    <div class="graph-container" *ngIf="selectedChart == 'Bar Chart'">
+      <canvas id="bar" class="chart chart-bar" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions" [legend]="ChartLegend"
+        chartType="bar" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="chartColors"></canvas>
+    </div>
+
+    <div class="graph-container" *ngIf="selectedChart == 'Pie Chart'">
+      <canvas id="pie" class="chart chart-pie" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions" [legend]="ChartLegend"
+        chartType="pie" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="pieDoChartColors"></canvas>
+    </div>
+    <div class="graph-container" *ngIf="selectedChart == 'Line Chart'">
+      <canvas id="line" class="chart chart-line" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions" [legend]="ChartLegend"
+        chartType="line" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="chartColors"></canvas>
+    </div>
+
+    <div class="graph-container" *ngIf="selectedChart =='Doughnut Chart'">
+      <canvas id="doughnut" class="chart chart-doughnut" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions"
+        [legend]="ChartLegend" chartType="doughnut" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"[colors]="pieDoChartColors"></canvas>
+    </div>
+    <div class="graph-container" *ngIf="selectedChart == 'Radar Chart'">
+      <canvas id="radar" class="chart chart-radar" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions"
+        [legend]="ChartLegend" chartType="radar" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="chartColors"></canvas>
+    </div>
+
+    <div class="graph-container" *ngIf="selectedChart =='Polar Chart'">
+      <!-- <canvas id="polar-area" class="chart chart-polar-area" baseChart [data]="ChartData[0]" [labels]="labels" [options]="ChartOptions"
+            [legend]="ChartLegend" chartType="ChartType"></canvas> -->
+
+      <canvas baseChart [data]="ChartData" [labels]="labels" [legend]="ChartLegend" chartType="selectedChart"></canvas>
+
+
+    </div>
+    <div class="graph-container" *ngIf="selectedChart == 'base Chart'">
+      <canvas id="base" class="chart chart-horizontal-bar" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions"
+        [legend]="ChartLegend"></canvas>
+    </div>
+    <div class="graph-container" *ngIf="selectedChart == 'Horizontal Bar Chart'">
+        <canvas id="radar" class="chart chart-horizontal-bar" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions"
+          [legend]="ChartLegend" chartType="horizontalBar" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+      <ion-card class="load-more-outer emptyDiv card-data graph-card">
+        <ion-row *ngFor='let ll of labels123;let i = index'>
+            <ion-col col-1>
+                <label>{{ll}} </label>
+            </ion-col>
+            <ion-col col-11 style="text-align:left">:
+                <span>{{labels[i]}}</span>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+  </div>
+</ion-content>

@@ -1,0 +1,58 @@
+
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button (click)="closePage()" class="back-button-custom" ion-button icon-only large start>
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title *ngIf="firstScreen=='ED'">{{heading}}</ion-title>
+        <ion-title *ngIf="firstScreen!='ED'">Entry Details</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div>
+        <div *ngFor="let data of entryDetails">
+            <div *ngIf="data.img !==null">
+                <div class="row">
+                    <div class="col">
+                        <b style="color: #0fb7d8;">{{data.column_desc}}</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="img-wrapper">
+                            <img [src]="'data:image/jpeg;base64,'+data.img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ion-grid class="entry-form-wrapper">
+            <ion-row class="row" *ngFor="let item of entryDetails">
+                <ion-col col-12 *ngIf="item.column_desc !='User Code' && item.column_desc !='SEQ_ID' && item.column_type!=='IMG' && item.column_type!=='VIDEO'">
+
+                    <ion-row class="form-field">
+                        <ion-col col-6>
+                            <label>{{item.column_desc}}</label>
+                        </ion-col>
+                        <ion-col col-6>
+                            <span>: {{item.value}}</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <div class="row">
+            <ion-col col-3></ion-col>
+            <ion-col col-6 class="btn-outer">
+                <button ion-button round *ngIf="flagForUpdateButton=='U#'" type="button" (click)="openUpdateEntry(entryDetails)" class="global-btn">
+                    Update Entry
+                </button>
+            </ion-col>
+        </div>
+
+    </div>
+</ion-content>

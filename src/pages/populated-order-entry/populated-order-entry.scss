@@ -1,0 +1,62 @@
+page-populated-order-entry {
+    
+    table {
+        th,
+        td {
+            // width: 20%;
+            padding: 0.5rem 0.2rem;
+        }
+    }
+    .populatedEntryTable,
+    .populatedEntryFormTable {
+        td {
+            input {
+                // width: 115px;
+                // min-width: 115px;
+                // max-width: 115px;
+                text-align: center;
+                margin: 0px !important;
+            }
+        }
+      
+    }
+    .global-btn,.cancel-btn,.save-btn{
+            // padding: 1.5em 3em !important; // @include respond-to(small-screen) {
+                @include respond-to(small-screens) {
+                padding: 0.6em 1.5em !important;
+        
+                }
+        }
+    
+    .close-icon {
+        display: inline-block;
+        font-size: 3em;
+        color: red;
+    }
+   .label-md{
+    margin: 0px;
+   }
+    // @media only screen and (max-width: 399px) and (min-width: 320px) {
+    //     .populated-btn-wrapper {
+    //         .button {
+    //             padding: 0 !important;
+    //         }
+    //     }
+    // }
+
+    .order-tbl-wrapper{
+        overflow-x: auto;
+    }
+    .emptyDivPopulated{
+        background: #fff;
+        -webkit-box-shadow: 0 7px 20px rgba(0, 0, 0, 0.06), 0 6px 6px transparent;
+        box-shadow: 0 7px 20px rgba(0, 0, 0, 0.06), 0 16px 16px transparent;
+        text-align: center;
+        padding: 20px;
+        border-radius: 3px;
+        color: #418a87;
+        font-size: 16px;
+        margin-top: 0.5rem;
+        border: 1px solid rgba(232, 227, 227, 0.5);
+    }
+}

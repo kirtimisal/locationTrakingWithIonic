@@ -1,0 +1,66 @@
+<ion-menu [content]="content" class="sidebar" type="overlay">
+  <!-- <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <ion-content class="sidebarContent">
+    <ion-buttons class="header-back">
+      <button class="cust-back-menu" ion-button icon-only clear menuToggle color="light">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <p>Lighthouse </p>
+      <span class="sub"> Info Systems Pvt. Ltd</span>
+
+    </ion-title>
+    <div class="lhs-logo-wrapper d-inline-block">
+      <img src="assets/imgs/logo-new.png">
+
+    </div>
+    <div class="list side-list">
+      <div>
+        <ion-item *ngIf="appTypes_flag">
+          <ion-icon name="md-apps" item-start class="sidebar-list-icon"></ion-icon>
+          <ion-label>App Type</ion-label>
+
+          <ion-select class="select-app-type" [(ngModel)]="selectAppType" menuClose (ngModelChange)="setAppType(appType);">
+            <ion-option *ngFor="let item of appTypes" [value]="item.apptype">{{item.apptype}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="entityCode_flag">
+          <ion-icon name="md-key" item-start class="sidebar-list-icon"></ion-icon>
+          <ion-label>Entity Code</ion-label>
+          <ion-select class="select-app-type" [(ngModel)]="entity_code" menuClose (ngModelChange)="setEntityCode(entityCode);">
+            <ion-option *ngFor="let item of entityCodes" [value]="item.code">{{item.value}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="offline_flag_app_run" (click)="refreshAppData()" menuClose>
+          <ion-icon name="md-refresh" item-start class="sidebar-list-icon"></ion-icon>
+          <ion-label>Refresh App Data</ion-label>
+        </ion-item>
+        <!-- <ion-item (click)="openChangePassword()" menuClose>
+        <ion-icon ios="ios-exit" md="md-exit" item-start class="sidebar-list-icon"></ion-icon>
+        <ion-label>Change Password</ion-label>
+      </ion-item> -->
+
+        <ion-item (click)="exitAPP()" menuClose>
+          <ion-icon name="md-exit" item-start class="sidebar-list-icon"></ion-icon>
+          <ion-label>Exit App</ion-label>
+        </ion-item>
+        <ion-item (click)="logOut()" menuClose>
+          <ion-icon name="md-log-out" item-start class="sidebar-list-icon"></ion-icon>
+          <ion-label>LogOut</ion-label>
+        </ion-item>
+      </div>
+      <p class="versionHeading"> Version : 2.0.0</p>
+    </div>
+
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

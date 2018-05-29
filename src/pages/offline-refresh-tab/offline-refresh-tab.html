@@ -1,0 +1,33 @@
+<!--
+  Generated template for the OfflineRefreshTabPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Offline Refresh Data</ion-title>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list class="bg-refresh-section">
+    <ion-item *ngFor="let item of offlineData" [hidden]="item.status=='F'" (click)="pageDetails(item)">
+      <ion-avatar item-start>
+        <img [src]="'data:image/jpeg;base64,'+item.image" class="img-shadow">
+      </ion-avatar>
+      {{item.table_desc}}
+      <ion-icon ios="ios-refresh" md="md-refresh" item-end class="text-grey-light"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <p (click)="openWebpage()">Lighthouse Info Systems pvt. Ltd</p>
+</ion-footer>

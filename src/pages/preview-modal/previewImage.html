@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button (click)="closeModal()" class="back-button-custom" ion-button icon-only large>
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Preview</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="order-img">
+            <ion-col col-12>
+                <img [src]="image">
+            </ion-col>
+            <ion-col col text-center>ANNEXURE - 1
+                </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+
+
+</ion-content>

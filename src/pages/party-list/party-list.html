@@ -1,0 +1,85 @@
+<!--
+  Generated template for the PartyListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{table_desc}}</ion-title>
+    <ion-buttons end>
+      <button ion-button clear icon-only (click)="showHide==true?showHide=false : showHide=true">
+        <ion-icon name="ios-search" style="color: white;    font-size: 2em;"></ion-icon>
+      </button>
+      <button ion-button clear icon-only (click)="openFilter()">
+        <ion-icon name="ios-funnel" style="color: white;"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<div class="search-wrapper" *ngIf="showHide">
+  <div class="search-main">
+
+    <div class="page-search-sec">
+      <div class="row  text-center">
+        <div class="col pr-0" col-8 col-sm-10>
+          <div class="list">
+            <div class="item item-input-inset">
+              <label class="item-input-wrapper">
+                <input class="w-100" type="text" placeholder="Search..." [(ngModel)]="searchText" (ngModelChange)="pageNo=0;">
+              </label>
+
+            </div>
+          </div>
+        </div>
+        <div class="col pl-0" col-4 col-sm-2 style="text-align:right">
+          <button class="button search-section-btn" (click)="scrollData('showLoder','',searchText,'refresh')">
+            <ion-icon name="md-search"></ion-icon>
+          </button>
+          <button class="button search-section-btn close-search-btn" (click)="showHide=false;searchText='';pageNo=0;ionViewDidLoad()">
+            <ion-icon name="md-close"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ion-content padding>
+
+  <div class="search-gap" *ngIf="showHide"></div>
+  <ion-list class="party-listing" [hidden]="partyListitems.length==0">
+    <ion-item *ngFor="let item of partyListitems" (click)="openPartyDetails(item.partyCode)">
+      <ion-avatar item-start>
+        <div class="item-icon-outer rounded-circle">{{item.firstChar}}</div>
+      </ion-avatar>
+      <h2>{{item.partyName}}</h2>
+      <ion-row>
+        <ion-col col-4>
+          <p class="party-code">{{item.partyCode}}</p>
+        </ion-col>
+        <ion-col col-8>
+          <p *ngIf="item.city">City : {{item.city}}</p>
+          <p *ngIf="!item.city">City : Not Available</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="partyListitems.length==0">
+    <ion-item>
+      <ion-card class="emptyData">
+        <h3 class="emptyHeading">
+          Data Not Available
+        </h3>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll class="ispinner" (ionInfinite)="doInfinite($event)" [hidden]="isNoMoreData">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingColor="red" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

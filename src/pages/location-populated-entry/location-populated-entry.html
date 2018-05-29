@@ -1,0 +1,155 @@
+<!--
+  Generated template for the LocationTrackingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{table_desc}}</ion-title>
+      <ion-buttons end *ngIf="flagForEntryListButton=='V#'" (click)="entryList()">
+        <button ion-button icon-only>
+          <ion-icon ios="ios-list-box-outline" md="md-list-box"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <table class="locationPopulatedTable">
+      <thead>
+        <tr>
+          <th *ngFor="let data1 of fieldsTH">{{data1}}</th>
+        </tr>
+      </thead>
+      <tbody>
+  
+        <tr *ngFor="let list of rowsOfPopulateData;let i = index">
+          <!-- <td>{{location.id}}</td>
+              
+              <td><img src="../../assets/imgs/default_cam.gif"></td>
+                <td><input type="text" name="remark"></td>
+                <td><ion-icon name="ios-cloud-upload-outline"></ion-icon></td> -->
+          <ng-container *ngFor="let item of list;let j=index;">
+            <td *ngIf="item.entry_by_user=='T' || item.entry_by_user=='R'">
+  
+              <div [ngSwitch]="item.item_help_property">
+                <ion-grid *ngSwitchCase="'I'" [hidden]="item.entry_by_user=='F'" (click)="takeImage(item.column_name,i)">
+                  <!-- <ion-label>{{item.column_desc}}</ion-label> -->
+                  <img src="assets/imgs/default_cam.gif" *ngIf="!item.value" />
+                  <img [src]="'data:image/jpeg;base64,'+item.value" *ngIf="item.value" />
+                </ion-grid>
+  
+                <ion-grid *ngSwitchCase="'T'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{item.column_desc}}</ion-label> -->
+                  <ion-input placeholder="{{item.tool_tip}}" id="{{item.column_name}}" [(ngModel)]="item.value" maxlength="{{item.column_size}}"
+                    required="'{{item.nullable}}'=='F'" [readonly]="item.entry_by_user=='R'" (blur)="dependent_nullable_logic(item.value,item.column_name,item.dependent_column_name)"></ion-input>
+                </ion-grid>
+                <ion-row *ngSwitchCase="'BT'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{ item.column_desc }}</ion-label> -->
+                  <button class="global-btn special-btn text-black"  ion-button small *ngIf="item.status==''" type="button" [disabled]="item.entry_by_user=='R'" (click)="saveLocation(item.column_name,i,list)">
+                    {{item.value}}
+                  </button>
+                  <button style="background-color:rgb(205, 169, 50)" *ngIf="item.status=='Checked'" type="button" [disabled]="item.entry_by_user=='R'" (click)="saveLocation(item.column_name,i,list)">
+                    {{item.value}}
+                  </button>
+                  <button style="background-color:rgb(114, 114, 141)" *ngIf="item.status=='uploaded'" type="button" [disabled]="item.entry_by_user=='R'" (click)="saveLocation(item.column_name,i,list)">
+                    {{item.value}}
+                  </button>
+                </ion-row>
+                <ion-item *ngSwitchCase="'L'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{item.column_desc}}</ion-label> -->
+                  <ion-input placeholder="{{item.tool_tip}}" [(ngModel)]="item.value" clearInput (ngModelChange)="dependent_nullable_logic(item.value,item.column_name,item.dependent_column_name)"
+                    id="{{item.column_name}}" placeholder="{{item.tool_tip}}" (click)="openLov(item.column_desc,item.column_name,item.dependent_row,item.dependent_row_logic, item.item_help_property)"
+                    ng-readonly="true" required="item.nullable=='F'"></ion-input>
+                </ion-item>
+  
+                <div *ngSwitchCase="'A'" [hidden]="item.entry_by_user=='F'">
+  
+                  <button ion-button icon-only item-end icon-left (click)="textAreaPopOver($event,item.column_name,item.value,item.column_desc,item.value)">
+                    <ion-icon name="create"></ion-icon>
+                  </button>
+                  <ion-textarea placeholder="{{item.tool_tip}}" [(ngModel)]="item.value" required="'{{item.nullable}}'=='F'"></ion-textarea>
+                </div>
+                <ion-item *ngSwitchCase="'C'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{item.column_desc}}
+                      <ion-icon name="ios-calendar" class="calendar-icon"></ion-icon>
+                    </ion-label> -->
+  
+                  <ion-datetime displayFormat="DD-MM-YYYY" min="{{item.from_value}}" max="{{item.to_value}}" placeholder="{{item.tool_tip}}"
+                    [(ngModel)]="item.value" #calenderName="ngModel"></ion-datetime>
+                  <ion-label *ngIf="calenderName.hasError('required') && calenderName.touched">Please Enter {{item.column_desc}}</ion-label>
+                </ion-item>
+  
+                <ion-item *ngSwitchCase="'DT'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{item.column_desc}}
+                      <ion-icon name="ios-calendar" class="calendar-icon"></ion-icon>
+                    </ion-label> -->
+                  <ion-datetime displayFormat="DD-MM-YYYY h:mm:s" min="{{item.from_value}}" max="{{item.to_value}}" placeholder="{{item.tool_tip}}"
+                    [(ngModel)]="item.value" #dateTimeName="ngModel"></ion-datetime>
+                  <ion-label *ngIf="dateTimeName.hasError('required') && dateTimeName.touched">Please Enter {{item.column_desc}}</ion-label>
+                </ion-item>
+  
+  
+                <div *ngSwitchCase="'N'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{ item.column_desc }}</ion-label> -->
+                  <ion-input type="number" pattern="[0-9]*" placeholder="{{item.tool_tip}}" [(ngModel)]="item.value" (ngModelChange)="autoCalculation(item.column_name)"
+                    maxlength="{{item.column_size}}" [min]="item.from_value" [max]="item.to_value" readonly="item.entry_by_user=='R' "
+                    required="item.nullable=='F' "></ion-input>
+  
+  
+                </div>
+                <div *ngSwitchCase="'E'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{ item.column_desc }}</ion-label> -->
+                  <ion-input type="email" pattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+                    placeholder="{{item.tool_tip}}" required="required" [(ngModel)]="item.value" readonly="item.entry_by_user=='R' "
+                    maxlength="{{item.to_value}}" minlength="{{item.from_value}}" (blur)="dependent_nullable_logic(item.value,item.column_name,item.dependent_column_name)"></ion-input>
+  
+                </div>
+  
+                <ion-item *ngSwitchCase="'H'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{ item.column_desc }}</ion-label> -->
+                  <!-- <ion-input placeholder="{{item.tool_tip}}"></ion-input> -->
+                  <ion-select [(ngModel)]="item.value" required="item.nullable=='F' ">
+                    <ion-option *ngFor="let option of item.dropdownVal;" value="{{option.code}}">{{option.name}}</ion-option>
+  
+                  </ion-select>
+                </ion-item>
+  
+                <ion-item *ngSwitchCase="'D'" [hidden]="item.entry_by_user=='F'">
+                  <!-- <ion-label stacked>{{ item.column_desc }}</ion-label> -->
+                  <!-- <ion-input placeholder="{{item.tool_tip}}" [(ngModel)]="item.value"></ion-input> -->
+                  <ion-select [(ngModel)]="item.value">
+                    <ion-option *ngFor="let option of item.dropdownVal" value="{{option}}">{{option}}</ion-option>
+                  </ion-select>
+                </ion-item>
+  
+  
+              </div>
+            </td>
+  
+          </ng-container>
+          <td *ngIf="uploadEntryStatus[i]" class="text-center">
+              <!-- <button type="button" (click)="uploadEntry(i,list)" [disabled]="uploadEntryStatus[i] =='F'"><ion-icon name="ios-cloud-upload-outline"></ion-icon></button> -->
+              <button type="button" class="transparent" (click)="uploadEntry(i,list)"  [disabled]="uploadEntryStatus[i] =='F'" ><ion-icon name="md-cloud-upload" class="text-orange"></ion-icon></button>
+            </td>
+  
+        </tr>
+      </tbody>
+    </table>
+    <ion-grid>
+      <ion-row class="btn-outer" *ngIf="rowsOfPopulateData">
+        <ion-col col-2></ion-col>
+        <ion-col col-4>
+          <button ion-button class="cancel-btn" (click)="cancelAddUpdateEntry()" round>Cancel</button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button class="global-btn" round (click)="save(rowsOfPopulateData,uploadEntryStatus)">Save</button>
+        </ion-col>
+  
+      </ion-row>
+    </ion-grid>
+  </ion-content>

@@ -1,0 +1,283 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title> {{reportingType}}
+            <!-- <span *ngIf="sp_obj.showDataInReportHead">
+                <a *ngFor="let item of sp_obj.showDataInReportHead">
+                    <span class="title-data-value">({{item.value}})</span>
+                </a>
+            </span> -->
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="showRefreshReportData()">
+                <ion-icon name="ios-list-box-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar class="subheader-toolbar">
+
+        <ion-title>
+            <ion-row class="subheader">
+                <!-- <span class="entity-code-label">(SE)</span> -->
+                <span class="entity-code-label" *ngIf="sp_obj.showDataInReportHead">
+                    <ng-container *ngFor="let item of sp_obj.showDataInReportHead">
+                        ({{item.value}})
+                    </ng-container>
+                </span>
+                <ion-col col col-4 style="padding-left: 15px;">
+                    <button (click)="tableView=!tableView;changeTableview()" *ngIf="flagforVerticleTable!=1 && flagForTypeChange!=5" ion-button
+                        class="download-btn" clear>
+                        <img src="assets/imgs/double-arrow-vertical.png" class="vert-img" *ngIf="tableView && detailLabelDataLength>0">
+                        <img src="assets/imgs/double-arrow.png" class="hori-img" *ngIf="!tableView && detailLabelDataLength>0">
+                    </button>
+                    <span class="display-text">Display :</span>
+                </ion-col>
+
+                <ion-col col col-3 *ngIf="showTableFlag!=1" class="btn-outer">
+                    <select class="selectDiv" [(ngModel)]="selectedValues" (ngModelChange)="openPageByType(selectedValues);">
+                        <option *ngFor="let item of ReportList" [value]="item.reportType">{{item.reportType}}
+                        </option>
+                    </select>
+                </ion-col>
+                <!-- && flagForTypeChange!=5 -->
+                <ion-col col col-3 *ngIf="valueFormatLength>0 && detailLabelDataLength>0 " class="btn-outer">
+                    <select class="selectDiv" [(ngModel)]="valueFormatVal" (ngModelChange)="changeValueFormat(valueFormatVal);">
+                        <option *ngFor="let item of valueFormatArray" [value]="item.code">{{item.name}}
+                        </option>
+                    </select>
+                </ion-col>
+                <ion-col class="search-icon" *ngIf="flagForTypeChange!=5 && detailLabelDataLength>0" col col-2 (click)="searchFlag==true?searchFlag=false : searchFlag=true">
+                    <button ion-button class="download-btn" clear>
+                        <img src="assets/imgs/search.png" class="search-icon">
+                        <!-- <ion-icon name="search"></ion-icon> -->
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<div class="search-wrapper" *ngIf="searchFlag">
+    <div class="search-main">
+
+        <div class="page-search-sec">
+            <div class="row  text-center">
+                <div class="col pr-0" col-8 col-sm-10>
+                    <div class="list">
+                        <div class="item item-input-inset">
+                            <label class="item-input-wrapper">
+                                <input class="w-100" type="text" placeholder="{{searchPlaceHolder}}" [(ngModel)]="searchEntity">
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col pl-0" col-4 col-sm-2 style="text-align:right">
+                    <button class="button search-section-btn" (click)="searchData(searchEntity)">
+                        <ion-icon name="md-search"></ion-icon>
+                    </button>
+                    <button class="button search-section-btn close-search-btn" (click)="clearSearch();">
+                        <ion-icon name="md-close"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<ion-content padding class="table-content">
+    <div class="search-gap" *ngIf="searchFlag"></div>
+
+    <div *ngIf="filteredParam!=null">
+        <div class="row" *ngFor="let parm of filteredParam" [hidden]="parm.value == null || parm.value==false ">
+            <div class="col col-40">
+                <b>{{parm.para_desc}}</b>
+            </div>
+            <div class="col col-10">: </div>
+            <div class="col col-50">{{parm.value}}</div>
+        </div>
+    </div>
+
+    <div *ngIf="flagForTableView==0 && flagForTypeChange==4 && flagforVerticleTable!=1" style="    overflow-x: auto;">
+        <div class="table-wrapper">
+            <ion-row *ngIf="horizontalTableData!=''">
+                <ion-col col-4 class="p-0">
+                    <table class="table-left">
+                        <thead>
+                            <tr *ngFor="let item of tableheader;let i = index" [attr.data-index]="i">
+                                <th *ngIf="i < noOfColumns">
+                                    <div class="td-inner">{{item}}</div>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </ion-col>
+
+                <ion-col col-8 class="outer-right p-0">
+                    <table class="table-right">
+                        <tbody>
+                            <ng-container *ngFor="let data2 of horizontalTableData;let i = index" [attr.data-index]="i">
+                                <tr *ngIf="i < noOfColumns">
+                                    <ng-container>
+                                        <td *ngFor="let data3 of data2 ; let j = index" [attr.data-index]="j">
+                                            <a *ngIf="hashIndex[i] !='NA'" class="hashIndex" (click)="tableDesc(j,hashIndex[i])"> {{data3}}</a>
+                                            <a *ngIf="hashIndex[i] =='NA'" style="    color: #666 !important;"> {{data3}}</a>
+                                        </td>
+                                    </ng-container>
+
+                                    <td [attr.rowspan]='noOfColumns' *ngIf="paginationFlag=='T' && i==0">
+                                        <button class="global-btn special-btn load-more-btn ion-button round vertical-btn" (click)="loadMoreTableData(searchFlag,searchEntity)"
+                                            [disabled]="noMoreData">
+                                            L
+                                            <br>O
+                                            <br>A
+                                            <br>D
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </ion-col>
+            </ion-row>
+
+        </div>
+        <div *ngIf="horizontalTableData==''" class="load-more-outer emptyDiv">
+            Data Not Available
+        </div>
+    </div>
+    <div *ngIf="flagForTableView==1 && flagForTypeChange==4 && flagforVerticleTable!=1" style="overflow-x: auto;">
+
+        <table *ngIf="detailLabelDataLength>0">
+            <thead>
+                <tr>
+                    <th *ngFor="let data1 of tableheader;let i = index" [attr.data-index]="i">
+                        <span *ngIf="i < noOfColumns"> {{data1}}</span>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data2 of detailLabelData; let j = index">
+                    <ng-container *ngIf="j<detailLabelDataLength">
+
+                        <ng-container *ngFor="let data3 of data2; let i = index" [attr.data-index]="i">
+                            <td *ngIf="i < noOfColumns" [ngStyle]="{'width': columnWidth[i]+'px','max-width':columnWidth[i]+'px','min-width':columnWidth[i]+'px','text-align':columnAlignment[i]}">
+                                <span>
+                                    <span *ngIf="hashIndex[i] !='NA'" class="hashIndex" (click)="tableDesc(j,hashIndex[i])">{{data3}}</span>
+                                    <span *ngIf="hashIndex[i] =='NA'">{{data3}}</span>
+                                </span>
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="paginationFlag=='T' && detailLabelDataLength>0" class="load-more-outer">
+            <button class="global-btn special-btn load-more-btn ion-button round" (click)="loadMoreTableData(searchFlag,searchEntity)"
+                [disabled]="noMoreData">Load More</button>
+        </div>
+        <ion-card *ngIf="detailLabelDataLength==0" class="load-more-outer emptyDiv card-data">
+            Data Not Available
+        </ion-card>
+
+    </div>
+    <div *ngIf="flagForTypeChange==4  && flagforVerticleTable==1">
+        <!-- <table class="w-100">
+            <thead>
+                <tr *ngFor="let x of tableValue">
+                    <td>
+                        <b>{{ x.series }} </b>
+                    </td>
+                    <td>{{ x.value }}</td>
+                </tr>
+            </thead>
+        </table> -->
+
+        <table class="w-100" *ngFor="let data2 of detailLabelData; let j = index">
+            <thead *ngIf="detailLabelDataLength>j">
+                <ng-container *ngFor="let data3 of data2; let i = index">
+                    <tr *ngIf="tableheader[i]">
+                        <td>
+                            <b>{{ tableheader[i] }}</b>
+                        </td>
+                        <td>
+                            <span *ngIf="hashIndex[i] !='NA'" class="hashIndex" (click)="tableDesc(j,hashIndex[i])">{{data2[i]}}</span>
+                            <span *ngIf="hashIndex[i] =='NA'">{{data2[i]}}</span>
+                        </td>
+                    </tr>
+                </ng-container>
+            </thead>
+        </table>
+
+
+    </div>
+
+    <div *ngIf="flagForTypeChange==5">
+
+        <div class="col col-50">
+            <select class="selectDiv" [(ngModel)]="selectedChart" style="background: linear-gradient(360deg, #10cef3, #1af1c9) !important;"
+                (ngModelChange)="changeGraph(selectedChart);">
+                <option *ngFor="let item of graphTypeList" [value]="item">{{item}}
+                </option>
+            </select>
+        </div>
+        <div class="graph-container" *ngIf="flagForPageChange == 1">
+            <canvas id="bar" class="chart chart-bar" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions" [legend]="ChartLegend"
+                [chartType]="ChartType" (chartClick)="chartClicked($event)" [colors]="barHorizontalChartColors"></canvas>
+        </div>
+
+        <div class="graph-container" *ngIf="flagForPageChange == 2">
+            <canvas id="pie" class="chart chart-pie" baseChart [datasets]="ChartData" [labels]="labels" [options]="ChartOptions" [legend]="ChartLegend"
+                [chartType]="ChartType" (chartClick)="chartClicked($event)" [colors]="pieDoChartColors"></canvas>
+        </div>
+        <div class="graph-container" *ngIf="flagForPageChange == 3">
+            <canvas id="line" class="chart chart-line" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions" [legend]="ChartLegend"
+                [chartType]="ChartType" (chartClick)="chartClicked($event)" [colors]="chartColors"></canvas>
+        </div>
+
+        <div class="graph-container" *ngIf="flagForPageChange == 4">
+            <canvas id="doughnut" class="chart chart-doughnut" baseChart [datasets]="ChartData" [labels]="labels" [options]="ChartOptions"
+                [legend]="ChartLegend" [chartType]="ChartType" (chartClick)="chartClicked($event)" [colors]="pieDoChartColors"></canvas>
+        </div>
+        <div class="graph-container" *ngIf="flagForPageChange == 5">
+            <canvas id="radar" class="chart chart-radar" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions"
+                [legend]="ChartLegend" [chartType]="ChartType" (chartClick)="chartClicked($event)" [colors]="chartColors"></canvas>
+        </div>
+
+        <div class="graph-container" *ngIf="flagForPageChange == 6">
+            <!-- <canvas id="polar-area" class="chart chart-polar-area" baseChart [data]="ChartData[0]" [labels]="labels" [options]="ChartOptions"
+                [legend]="ChartLegend" [chartType]="ChartType"></canvas> -->
+
+            <canvas baseChart [data]="ChartData" [labels]="labels" [legend]="ChartLegend" [chartType]="ChartType"></canvas>
+
+
+        </div>
+        <div class="graph-container" *ngIf="flagForPageChange == 7">
+            <canvas id="horizontalBar" class="chart chart-horizontal-bar" baseChart [datasets]="ChartData" [labels]="labels123" [options]="ChartOptions"
+                [legend]="ChartLegend" [chartType]="ChartType" (chartClick)="chartClicked($event)" [colors]="barHorizontalChartColors"></canvas>
+        </div>
+
+        <ion-card class="load-more-outer emptyDiv card-data graph-card">
+            <ion-row *ngFor='let ll of labels123;let i = index'>
+                <ion-col col-1>
+                    <label>{{ll}} </label>
+                </ion-col>
+                <ion-col col-11 style="text-align:left">:
+                    <span>{{labels[i]}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+
+
+    </div>
+    <div *ngIf="flagForTypeChange==6" class="load-more-outer emptyDiv">
+        Graph Data Not Available
+    </div>
+    <div *ngIf="flagForTypeChange==4">
+        <button class="button" (click)="anchorScroll(anchorS);anchorS='bottom'" *ngIf="flagForTableView==1 && anchorS=='top'"></button>
+        <button class="button" (click)="anchorScroll(anchorS);anchorS='top';" *ngIf="flagForTableView==1 && anchorS=='bottom'"></button>
+        <a class="button" (click)="anchorScrollL('HTable');anchorS='bottom'" *ngIf="flagForTableView==0 && anchorS=='top'"></a>
+        <button class="button" (click)="anchorScrollR('HTable');anchorS='top';" *ngIf="flagForTableView==0 && anchorS=='bottom'"></button>
+    </div>
+
+
+</ion-content>

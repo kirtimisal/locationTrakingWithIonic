@@ -1,0 +1,34 @@
+
+<ion-header>
+
+  <ion-navbar>
+      <ion-buttons left>
+          <button ion-button icon-only (click)="viewCtrl.dismiss()" >
+              <ion-icon name="arrow-back"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>{{heading}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+<div class="edit-popoever">
+<ion-item>
+  <ion-textarea [(ngModel)]="comment.val"></ion-textarea>
+</ion-item>
+
+
+<ion-grid>
+  <ion-row class="btn-outer">
+    <ion-col col-3></ion-col>
+    <ion-col col-6 >
+      <ion-buttons>
+        <button ion-button  round class="save-btn" (click)="save()">OK</button>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
+</ion-content>

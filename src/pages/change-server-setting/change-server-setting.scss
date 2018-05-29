@@ -1,0 +1,94 @@
+
+/*############## Change Settings #############*/
+
+
+/*##########App header##########*/
+
+page-change-server-setting {
+    
+    .toolbar-background-md {
+        border-color: transparent;
+        background: url(../../assets/imgs/app-header-bg.png);
+        background-size: 100% 100%;
+    }
+    .header-md::after,
+    .tabs-md[tabsPlacement="top"] > .tabbar::after,
+    .footer-md::before,
+    .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+        background-image: none;
+    }
+    .toolbar {
+        -webkit-box-align: start;
+        -webkit-align-items: start;
+        align-items: start;
+    }
+    .toolbar-md {
+        padding: 4px;
+        // min-height: 100px;
+    }
+    .toolbar-title-md {
+        color: $text-white;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    .back-button.show-back-button {
+        color: $text-white;
+    }
+    /*##########App header##########*/
+    
+    
+    .change-setting-container {
+        .item.item-block .item-inner{
+            border-bottom: none !important;
+        }
+        a {
+            color: #919191;
+            text-decoration: none;
+        }
+        .text-right {
+            margin-top: 0.5rem;
+        }
+        .item {
+            padding-left: 0px;
+        }
+        .change-setting-label {
+            color: #6a6969;
+            font-size: 1.6rem;
+            overflow: initial;
+            text-overflow: initial;
+            white-space: normal;
+        }
+    }
+    
+    .change-setting-container-main .item-inner {
+        input {
+            border: none !important;
+            border-bottom: 1px solid #ccc !important;
+            width: 100%;
+            margin: 0.7rem 0rem;
+        }
+        .label-md {
+            margin: 0px 0px 10px 0;
+        }
+    }
+    .header-secondary {
+        color: $text-white;
+    }
+    .change-setting-btn {
+        bottom: -4rem;
+        width: 85%;
+        margin: auto;
+      
+    }
+    .app-btn {
+        @extend %global-btn;
+    }
+    .show-password {
+        float: right;
+        height: 15px !important;
+        color:$secondary-color;
+    }
+}
+
+
+/*############## Change Settings #############*/

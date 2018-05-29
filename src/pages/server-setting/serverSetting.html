@@ -1,0 +1,94 @@
+<ion-header>
+        <ion-navbar>
+            <ion-buttons left>
+                <button (click)="closeModal()" class="back-button-custom" ion-button icon-only large>
+                    <ion-icon name="arrow-back"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>Server Setting </ion-title>
+        </ion-navbar>
+    </ion-header>
+    
+    <ion-content padding class="change-setting-body">
+    
+        <div class="change-setting-container change-setting-container-main ">
+                <form #form="ngForm" (ngSubmit)="changeServerSetting(setting)">
+    
+                <ion-item>
+                    <label class="change-setting-label">Server Url
+                        <span class="mandatory">*</span>
+                    </label>
+                    <input name="serverUrl" list="server_list" [(ngModel)]="setting.serverUrl">
+                    <datalist id="server_list">
+                        <option *ngFor="let item of setting.serverList;" value="{{item}}"></option>
+                    </datalist>
+                </ion-item>
+    
+    
+                <ion-item>
+                    <label class="change-setting-label">WAR Name
+                        <span class="mandatory">*</span>
+                    </label>
+                    <input name="warName" list="warList" [(ngModel)]="setting.warName">
+                    <datalist id="warList">
+                        <option *ngFor="let item of setting.warList;" value="{{item}}"></option>
+                    </datalist>
+    
+                </ion-item>
+                <ion-item>
+                    <label class="change-setting-label">Entity Code</label>
+                    <input name="dbEntity" list="dbEntityList" [(ngModel)]="setting.dbEntity" (ngModelChange)="setDbUser(setting.dbEntity)">
+                    <datalist id="dbEntityList">
+                        <option *ngFor="let item of setting.dbEntityList;" value="{{item}}"></option>
+                    </datalist>
+                </ion-item>
+                <ion-item>
+                    <label class="change-setting-label">Database User</label>
+                    <input name="databaseUser" list="databaseList" [(ngModel)]="setting.databaseUser">
+                    <datalist id="databaseList">
+                        <option *ngFor="let item of setting.databaseList;" value="{{item}}"></option>
+                    </datalist>
+                </ion-item>
+
+                <ion-item>
+                    <label class="change-setting-label">Database Password
+                        <button class="show-password" type="button" ion-button icon-only clear (click)="hideShowPassword()">
+                            <ion-icon *ngIf="inputType=='text'" name="eye"></ion-icon>
+                            <ion-icon *ngIf="inputType=='password'" name="eye-off"></ion-icon>
+                        </button>
+                    </label>
+                    <input type="{{inputType}}" name="dbPassword" [(ngModel)]="setting.dbPassword">
+                </ion-item>
+                <ion-item>
+                    <label class="change-setting-label">Database Port No.</label>
+                    <input name="portNo" list="portNoList" [(ngModel)]="setting.portNo">
+                    <datalist id="portNoList">
+                        <option *ngFor="let item of setting.portNoList;" value="{{item}}"></option>
+                    </datalist>
+                </ion-item>
+                <ion-item>
+                    <label class="change-setting-label">Database URL</label>
+                    <input name="dbUrl" list="dbUrlList" [(ngModel)]="setting.dbUrl">
+                    <datalist id="dbUrlList">
+                        <option *ngFor="let item of setting.dbUrlList;" value="{{item}}"></option>
+                    </datalist>
+                </ion-item>
+
+    
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-6>
+                                <button class="cancel-btn" ion-button type="button" (click)="closeModal()" block round> Cancel </button>
+                        </ion-col>
+                        <ion-col col-6>
+                                <button class="save-btn"  [disabled]="!form.valid" ion-button type="submit" block round> Save </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+               
+    
+            </form>
+        </div>
+    
+    
+    </ion-content>

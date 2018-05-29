@@ -1,0 +1,192 @@
+page-login {
+
+	
+
+	$primaryColor: #fe2f65;
+	.border-0 {
+		border: 0 !important;
+	}
+	.grey-text {
+		color: grey !important;
+	}
+	.primaryTextColor {
+		color: #fe2f65;
+	
+	}
+	.lhs-logo {
+		vertical-align: middle;
+		margin-right: 1em;
+	}
+	.login-outer {
+		$url: "../assets/imgs/login-background.jpg";
+		@include global-bg-image($url, $bg-size-100);
+		height: 500px;
+		width: 100%;
+	}
+	.scroll-content,
+	.login-outer-padding {
+		padding: 0 !important;
+	}
+	.loginForm {
+		// padding-top: 5.7rem;
+		padding-top: 2rem;
+		width: 80%;
+		@include respond-to(small-screens) {
+			width: 75%;
+		}
+		@include respond-to(medium-screens) {
+    width: 73%;
+		}
+		@include respond-to(wide-screens) {
+    width: 70%;
+		}
+
+		
+		
+		.item-inner {
+			margin-left: 0 !important;
+		}
+		.item {
+			margin-bottom: 1em;
+			background-color: transparent;
+			@include respond-to(small-screens) {
+				margin-bottom: 0;
+			}
+		}
+		.text-input {
+			font-size: 1.6rem;
+		}
+	}
+	ion-icon {
+		color: #ff5d3c;
+	}
+	.login-btn {
+		ion-icon {
+			margin-left: 1em;
+		}
+	}
+	.login-btn-wrap .label {
+		margin: 0px 0px 0px 8px;
+	}
+	.login-btn {
+		@extend %global-btn;
+		width: 195px;
+		@include respond-to(small-screens) {
+			width: 11em;
+			margin-left: 8px;
+		}
+	}
+	.setting-icon {
+		position: absolute;
+		bottom: 1em;
+		color: #fff;
+		right: 1em;
+		background: #d82f55;
+		padding: 0.5em;
+		border-radius: 50%;
+		width: 32px;
+		height: 32px;
+	}
+	.forgot-link {
+		margin-left: 2em;
+		a {
+			text-decoration: none;
+			font-size: 1.5rem;
+		}
+		.item-inner {
+			border-bottom: 0 !important;
+		}
+		.label {
+			margin: 0px 0px 0px 8px;
+		}
+	}
+	.frgtForm {
+		padding-top: 7.7rem !important;
+		@include respond-to(small-screens) {
+			padding-top: 3rem !important;
+		}
+	}
+	.frgtHeading {
+		background: none;
+		font-size: 22px;
+		vertical-align: sub;
+		@include respond-to(small-screens) {
+			font-size: 15px;
+		}
+	}
+	.primaryTextColor {
+		@include respond-to(small-screens) {
+			padding-left: 0 !important;
+		}
+		h4 {
+			@include respond-to(small-screens) {
+				font-size: 1.6rem !important;
+				;
+			}
+		}
+	}
+	.ip-head {
+		font-size: 1.5rem;
+		margin: 0px 0px 13px 3.2em;
+	}
+	.ip-sec-wrap {
+		.item-inner {
+			border-bottom: none !important;
+		}
+	}
+	.ip-sec-wrap.input-has-focus .item-inner {
+		box-shadow: none !important;
+		border: none !important;
+		outline: none !important;
+	}
+	.ip-icon {
+		font-size: 24px !important;
+	}
+	.ip-sec {
+		width: 38px;
+		display: inline-block;
+		border: 1px solid #dedede;
+		margin-right: 6px;
+		.text-input {
+			width: calc(100% - 4px - 4px);
+			margin: 4px 3px;
+			@include respond-to(small-screens) {
+				font-size: 1.2rem;
+			}
+		}
+		@include respond-to(small-screens) {
+			width: 30px;
+		}
+	}
+	.ip-sec-first {
+		margin-left: 8px;
+	}
+	page-login .loginForm .text-input {
+		font-size: 1.6rem;
+	}
+
+	
+	.list> .item-block:first-child {
+		border-top: none;
+	}
+	.list> .item-block:last-child{
+border-bottom: none;
+	}
+
+
+@include respond-to(tablet-screens){
+	.loginForm {
+		width: 60%;
+		padding: 12rem 0 0 5rem;
+		// padding: 8rem 0 0 5rem;
+	}
+
+	.primaryTextColor {
+		color: #fe2f65;
+		padding: 7rem 0 0 6rem !important;
+	    // padding: 12rem 0 0 6rem !important; 
+	}
+}
+
+
+}

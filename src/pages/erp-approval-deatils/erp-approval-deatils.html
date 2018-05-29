@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons left>
+      <button class="back-button-custom" (click)="back()" ion-button icon-only large>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button class="back-button-custom" (click)="getApprovalStatus()" ion-button icon-only large>
+        <ion-icon name="at"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{tnature_name}}</ion-title>
+  </ion-navbar>
+  <!-- <ion-toolbar class="plain-bg">
+    <div id="container">
+      <div id="arrowL">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </div>
+      <div id="arrowR">
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </div>
+      <div color="dark" class="SliderWrapper" id="list-container">
+        <div class="list" id="btn_scroll">
+          <button type="button" ion-button small id="btn_{{i}}" *ngFor="let item of erpApprDetails;let i = index" [attr.data-index]="i"
+            [ngClass]="{'activeButton': activebutton == i }" clear class=" tabs-btn" (click)="selectTab(i)" value="{{item.heading}}">
+            {{item.heading}} </button>
+        </div>
+      </div>
+    </div>
+
+  </ion-toolbar> -->
+
+  <ion-toolbar class="plain-bg">
+    <div id="container">
+      <div id="arrowL" (click)="backToStart()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </div>
+      <div id="arrowR" (click)="scrollToRight()">
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </div>
+      <ion-scroll #scroll scrollX="true" class="SliderWrapper ">
+        <div>
+          <button type="button" ion-button small id="btn_{{i}}" *ngFor="let item of erpApprDetails;let i = index" [attr.data-index]="i"
+            [ngClass]="{'activeButton': activebutton == i }" clear class=" tabs-btn" (click)="selectTab(i)" value="{{item.heading}}">
+            {{item.heading}}</button>
+        </div>
+      </ion-scroll>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  padding>
+
+
+
+  <div [ngSwitch]="activebutton">
+    <div *ngFor="let items of erpApprDetails;let i = index">
+
+      <div *ngSwitchCase="i" class="card-outer">
+        <ion-card class="card-sec" *ngFor="let item of items.values;let j = index">
+
+          <ion-row class="item-nm item-row" *ngFor="let subItem of item" [hidden]="subItem.heading=='ROWID'" (click)="getItemDetails(subItem,items.seqId,j)"
+            [ngClass]="{'activeAmt': subItem.heading=='Basic Rate' || subItem.heading=='Total Amt' }">
+
+            <ion-col col-5>
+              <label>{{subItem.heading}} </label>
+              <label style="float:right">:</label>
+            </ion-col>
+            <ion-col col-7>
+
+              <span class="form-value" [ngStyle]="subItem.isEdited && {'color': '#fe2f65'}">{{subItem.value}}
+                <!-- <span *ngIf="subItem.isEdited" style="color:red"> ({{subItem.editedItem.updatedQty}})</span> -->
+              </span>
+
+              <span class="arrow-outer" *ngIf="subItem.slno && !subItem.editFlag">
+                <ion-icon name="ios-arrow-forward"></ion-icon>
+              </span>
+              <span class="arrow-outer" *ngIf="subItem.editFlag" [hidden]="type == 'previous'">
+                <ion-icon name="create"></ion-icon>
+              </span>
+              <!-- <span class="arrow-outer" *ngIf="subItem.slno">
+                <ion-icon name="ios-arrow-forward"></ion-icon>
+              </span> -->
+            </ion-col>
+          </ion-row>
+
+          <ion-grid *ngIf="items.showAttachmentGrid==1">
+            <ion-row *ngFor="let data of items.previewButtonVal[j]">
+              <ion-col col-3></ion-col>
+              <ion-col col-6>
+                <button ion-button type="button" *ngIf="data=='false'" class="global-btn  special-btn" round small (click)="downloadFile(item)">DownLoad</button>
+                <button ion-button type="button" *ngIf="data=='true'" class="global-btn  special-btn" round small (click)="downloadFile(item)">Preview</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+        </ion-card>
+        <ion-card *ngIf="items.values.length == 0">
+            <ion-row class="NoRecordWarning">
+              <label>Data Not Available</label>
+            </ion-row>
+          </ion-card>
+      </div>
+
+
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer class="plain-bg" [hidden]="type == 'previous'">
+  <ion-row>
+    <ion-col col-6>
+      <button ion-button type="button" class="global-btn  special-btn" round small (click)="updateStatus('A')">Approve</button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button type="button" class="global-btn" round small (click)="updateStatus('R')">Reject</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

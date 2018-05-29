@@ -1,0 +1,141 @@
+<!--
+  Generated template for the NotificationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button class="back-button-custom" (click)="back()" ion-button icon-only large>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Archived Notification</ion-title>
+    <ion-buttons end *ngIf="selectDiv==1" (click)="recoverdSelectedItems()">
+      <button ion-button icon-only clear>
+        <ion-icon name="ios-archive"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="selectDiv==1" (click)="deleteSelectedItems()" end>
+      <button ion-button icon-only clear>
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    
+
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="notificationContent">
+
+
+  <div padding *ngIf="filterFlag">
+    <ion-segment [(ngModel)]="filter.flag">
+      <ion-segment-button value="week" (click)="filterList(filter.flag)">
+        last 7 Days
+      </ion-segment-button>
+      <ion-segment-button value="between">
+        Between Days
+      </ion-segment-button>
+      <ion-segment-button value="all" click="filterList(filter.flag)">
+        All
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="filterFlag">
+    <ion-list *ngSwitchCase="'between'">
+      <ion-item>
+        <h2>between Filter</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-list>
+
+    <ion-card [ngClass]="{'cardActive': item.checked}" class="notif-items" *ngFor="let item of archivedList; let i=index" (press)="(item.toggled=!item.toggled);(item.checked=true);selectDivValue();">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <label>Date :</label>
+              <span>
+                {{item.col6}}
+              </span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <label>Note :</label>
+              <span [innerHTML]="item.col5">
+              </span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <label>Created By :</label>
+              <span>
+                {{ item.col9 }}
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-row class="footer-row" [ngClass]="{'footerActive': item.checked}">
+        <ion-col class="msg-box text-center" *ngIf="selectDiv!=1">
+          <button ion-button icon-left clear small (click)="(item.toggled=true);recoverdSelectedItems()">
+            <ion-icon name="undo"></ion-icon>
+            <div>Restore</div>
+          </button>
+        </ion-col>
+        <ion-col class="msg-box text-center"  *ngIf="selectDiv!=1">
+          <button ion-button icon-left clear small (click)="delete(item,$index)">
+            <ion-icon name="trash"></ion-icon>
+            <div>Delete</div>
+          </button>
+        </ion-col>
+        <ion-col class="msg-box text-center"  *ngIf="selectDiv==1">
+          <ion-checkbox color="secondary" [(ngModel)]="item.checked"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+
+    <!-- <ion-item class="notif-items" *ngFor="let item of archivedList; let i=index">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <label>Date :</label>
+            <span>
+              {{item.col6}}
+            </span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <label>Note :</label>
+            <span [innerHTML]="item.col5">
+            </span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <label>Created By :</label>
+            <span>
+              {{ item.col9 }}
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item> -->
+    <!-- </ion-content> -->
+
+
+  </ion-list>
+</ion-content>

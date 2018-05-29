@@ -1,0 +1,36 @@
+<!--
+  Generated template for the ImageEntryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{table_desc}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="ProfileDetails-Container">
+    <div class="profile-image">
+      <div class="row" style="color: yellow;text-align: center">
+        <p>Please double tap to zoom Image</p>
+      </div>
+      <div *ngFor="let data of imageDetails">
+        <div class="row">
+          <div class="col">
+            <b>{{data.imageName}}</b>
+          </div>
+        </div>
+        <div class="row">
+          <img src="data:image/JPEG;base64,{{data.image}}"  class="full-image" imageViewer />
+        </div>
+      </div>
+    </div>
+    <div class="profile-details"></div>
+    <div class="clr"></div>
+  </div>
+</ion-content>

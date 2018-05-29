@@ -1,0 +1,45 @@
+page-appkey-validation {
+    .app-key-container {
+        background: url(../assets/imgs/bg-app-key.png) !important;
+        background-size: 100% 49% !important;
+        height: 100%;
+        width: 100% !important;
+        background-repeat: no-repeat !important;
+        bottom: 0 !important;
+        background-position: bottom !important;
+    }
+    .item-md,
+    .item-ios {
+        background: transparent;
+        padding: 0;
+    }
+    .global-btn {
+        width: 50%;
+        margin: auto;
+        text-transform: uppercase;
+    }
+    .form-section {
+        padding-top: 5rem;
+    }
+    .btn-outer {
+        margin-top: 4rem;
+    }
+    .text-input {
+        font-size: 1.6rem;
+    }
+    .item-inner {
+        margin-right: 24px;
+    }
+    .lhs-logo {
+        vertical-align: middle;
+        margin-top: 2rem;
+    }
+    @include respond-to(tablet-screens) {
+        .app-key-container {
+            padding-top: 9rem;
+        }
+        .form-section {
+            padding-top: 15rem;
+        }
+    }
+}

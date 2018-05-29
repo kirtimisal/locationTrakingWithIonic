@@ -1,0 +1,131 @@
+page-erp-approval-list {
+    .searchbar-input-container{
+        position: fixed !important;
+        width: 95% !important;
+        top: 5.5rem;
+       
+    }
+    .searchbar-gap{
+        height: 35px;
+    }
+    .order-search{
+    background: #fff !important;
+    z-index: 9999;
+    }
+    .fabButton{
+        position: absolute;
+        z-index: 999;
+        bottom: 20px !important;
+        right: 20px !important;
+        width: 46px !important;
+        height: 46px !important;
+        line-height: 46px !important;
+        /* background: #FE3F80 !important; */
+        color: #fff;
+    
+        ion-fab-list{
+            margin: 40px 0 !important;
+        }
+    }
+    .search-wrapper{
+        position: fixed;
+        width: 100%;
+        left: 0;
+        right: 0;
+        z-index: 2 !important;
+        top: 4rem !important;
+        height: 43px !important;
+        background: #fff;
+        padding-top: 0.5rem;
+       }
+       .w-100{
+        width:100%;
+        height: 27px;
+        padding: 0 1rem;
+        border: 1.4px solid #10cef3;
+    }
+    .search-section-btn{
+        @include global-gradient-secondary(90deg);
+        height: 27px;
+        padding: 0 22px;
+        color: #fff;
+        float: right;
+@include respond-to(small-screens){
+    padding: 0 14px;
+}
+    }    
+    .search-gap{
+        height: 2rem;
+    }
+    .search-main{
+        padding: 0 1rem;
+    }
+        .card-wrapper{
+            text-align: center;
+            .NoRecordWarning{
+                color: #B9A247; font-size:17px; text-align:center; 
+               }
+        }
+          
+        .card-sec{
+    
+            text-align: left;
+            color:  $text-grey-dark;
+            font-size: 1.4rem;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.04), 0 10px 10px rgba(0, 0, 0, 0.12);
+            margin:2rem 1rem;
+          
+          
+            .col{
+                padding:5px 5px 0px 5px !important;
+            }
+    
+            .due-dt{
+                color: #e13838 !important;
+            }
+          
+            .item-nm {
+                label{
+                    color: #424242;
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                } 
+                .vrno-sec{
+                    color: #00a5c5 !important;
+                }   
+    
+                .entity-sec{
+                    color: #e68508  !important;
+                }
+            }
+        
+          
+            .other-item{
+                padding-top: 0px !important;
+           
+                div{
+                    font-size: 1.3rem;
+                    color: $text-grey-dark;
+                }
+            }
+    
+        }
+    
+    .card-sec{
+        padding:1rem;
+        &:nth-child(even) {
+            background: $text-white;
+            border-left: 4px solid  $blue-color;
+        }
+        &:nth-child(odd) {
+            background: $text-white;
+            border-left: 4px solid  $green-color; 
+        }
+    }
+    .add-fab-btn{
+        @include global-gradient-primary(180deg);
+        
+    }
+    
+    }
+    

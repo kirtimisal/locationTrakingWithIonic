@@ -1,0 +1,282 @@
+page-party-details {
+    .content {
+        background: #ededed ;
+    }
+    ion-header {
+        box-shadow: none !important;
+    }
+    ion-app.md [padding] {
+        padding: 0 16px;
+    }
+    .SliderWrapper {
+        max-height: 140px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        background: $text-white;
+        height: 50px;
+    }
+    button {
+        display: inline-block;
+        font-size: 16px;
+        /*reset font size*/
+    }
+    button:first-child {
+        margin-left: 10px;
+        /*match space*/ 
+    }
+    button:last-child {
+        margin-right: 10px;
+        /*match space*/
+    }
+    ion-slides {
+        height: auto;
+    }
+    .plain-bg {
+        background: none !important;
+        .toolbar-background-md {
+            background: none !important;
+        }
+        .global-btn,
+        .cancel-btn {
+            padding: 1.3em 2em !important;
+            width: 90%;
+            margin: 0.2rem;
+        }
+    }
+    .tabs-btn {
+        margin: 0 0.6rem;
+        color: $text-grey-dark;
+        padding: 2rem 0.9em;
+    }
+    .slide-zoom {
+        margin: 0 2rem 0 0;
+    }
+    .card-wrapper {
+        text-align: center;
+        
+    }
+    .card-sec {
+        margin-top: 1rem !important;
+        text-align: left;
+        color: #666;
+        font-size: 1.4rem;
+        margin: 0rem 1rem;
+        margin-bottom: 1rem;
+        padding: 3px;
+        /* border: 1px solid #eee; */
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        position: relative;
+        background: #fff;
+        box-shadow: 2px 2px 9px #e0e0e0;
+        border-top: 1px solid $blue-color; // &::after{
+       
+        .col {
+            padding: 5px 5px 0px 5px !important;
+        }
+        .due-dt {
+            color: #e13838 !important;
+        }
+        .item-nm {
+            label {
+                // color: #424242;
+                font-size: 1.5rem;
+            }
+            .form-value {
+                color: rgb(25, 25, 25);
+                font-weight: 500;
+            }
+        }
+        .other-item div {
+            font-size: 1.3rem;
+            color: $text-grey-dark;
+        }
+        .NoRecordWarning {
+            color: #B9A247;
+            font-size: 17px;
+            text-align: center;
+            padding: 8px;
+            label{
+                margin:auto;
+            }
+        }
+    } // -------------------------------------------------------
+    #arrowR {
+        // @include global-gradient-secondary(45deg);
+        width: 25px;
+        height: 25px;
+        float: right;
+        cursor: pointer;
+        padding: 4px 10px 0px;
+        border-radius: 50%;
+        color: $blue-color;
+        margin-top: 14px;
+      
+    }
+    #arrowL {
+        // @include global-gradient-secondary(45deg);
+        
+        width: 25px;
+        height: 25px;
+        float: left;
+        cursor: pointer;
+        padding: 4px 10px 0px;
+        border-radius: 50%;
+        color: $blue-color;;
+        margin-top: 14px;
+       
+    }
+    .item-row {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+    }
+    .activeButton {
+        background: $text-white !important;
+        box-shadow: none;
+        color: #10cef3;
+        border-bottom: 2px solid #10cef3;
+    }
+    .activeAmt {
+        background: #e4e4e4 !important;
+        box-shadow: none;
+        color: #101010;
+        font-weight: 700;
+        col {
+            padding: 5px !important;
+        }
+    }
+    .arrow-outer {
+        float: right;
+        font-weight: bold;
+        color: #fe2f65;
+    }
+    .phone-outer,
+    .emial-outer {
+        float: right;
+        font-weight: bold;
+        color: $blue-color;
+        font-size: 1.8rem;
+    }
+    .anchorText {
+        text-decoration: none;
+        color: #424242;
+    }
+    .profileDetailsList {
+        .item-md {
+            background: transparent !important;
+        }
+    }
+    .profile-grid-section {
+        color: #424242;
+    }
+    .party-name-row {
+        ion-col {
+            ion-icon {
+                font-size: 2rem;
+            }
+            span {
+                font-size: 1.7rem;
+                font-weight: 500;
+            }
+        }
+    }
+    .sub-header {
+        width: 90%;
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        box-shadow:0px 6px 7px rgba(125, 125, 125, 0.27), 0 6px 18px 5px rgba(115, 115, 115, 0.17);
+        border-radius: 0.8rem;
+            background: $bg-white !important;
+      
+    }
+    
+
+
+.toolbar-md.main-page-header {
+    min-height: 10rem;
+}
+.toolbar-ios.main-page-header {
+    min-height: 12rem !important;
+}
+.plain-bg {
+    
+    .toolbar-background{
+        background: $bg-white !important;
+    }
+}
+.profile-grid-section{
+    ion-icon{
+        color: $secondary-color;
+    }
+}
+.party-details-title{
+    .toolbar-title{ 
+    // text-align: left;
+    // margin-left: 28%;
+    }
+}
+.header-ios{
+    .sub-header{
+        top: 6rem;
+    }
+}
+.header-md{
+    .sub-header{
+        top: 4rem;
+    }
+}
+
+.toolbar-ios.plain-bg{
+    margin-top: 6rem;
+    
+}
+.toolbar-md.plain-bg{
+    margin-top: 6rem;
+   
+}
+.user-value{
+    white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+// width: 300px;
+}
+.toolbar {
+    align-items:flex-start  !important;
+    -webkit-align-items:flex-start  !important;
+    padding-top: 5px !important;
+ }
+
+
+ion-title {
+align-items:flex-start !important;
+-webkit-align-items:flex-start !important;
+padding-top: 5px !important;
+}
+.toolbar-title {
+    margin-top: 0rem;
+    padding: 0 !important;
+}
+@include respond-to(tablet-screens){
+    .toolbar {
+        align-items:flex-start  !important;
+        -webkit-align-items:flex-start  !important;
+        padding-top: 5px !important;
+     }
+   
+ 
+ ion-title {
+    align-items:flex-start !important;
+    -webkit-align-items:flex-start !important;
+    padding-top: 5px !important;
+}
+    
+.header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios {
+    border-color:transparent !important;
+}
+}
+}
+

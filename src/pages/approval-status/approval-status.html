@@ -1,0 +1,55 @@
+<!--
+  Generated template for the ApprovalStatusPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Approval History</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="card-outer">
+    <ion-card class="card-sec" *ngFor="let item of approvalStatus;let j = index">
+      <ion-row class="item-nm item-row">
+        <ion-col col-5>
+          <label>Approved By </label>
+          <label style="float:right">:</label>
+        </ion-col>
+        <ion-col col-7>
+          <span class="form-value" [ngStyle]="{'color': '#fe2f65'}">{{item.approved_by_user}}</span>
+        </ion-col>
+        <ion-col col-5>
+          <label>Approved Date </label>
+          <label style="float:right">:</label>
+        </ion-col>
+        <ion-col col-7>
+          <span class="form-value">{{item.approved_date}}
+          </span>
+        </ion-col>
+        <ion-col col-5>
+          <label>Remark </label>
+          <label style="float:right">:</label>
+        </ion-col>
+        <ion-col col-7>
+          <span class="form-value">{{item.remark}}
+          </span>
+        </ion-col>
+        <ion-col col-5>
+          <label>User Level </label>
+          <label style="float:right">:</label>
+        </ion-col>
+        <ion-col col-7>
+          <span class="form-value">{{item.user_level}}
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card class="card-sec" *ngIf="approvalStatus.length==0">
+      <ion-row class="item-nm item-row NoRecordWarning">
+        <label>Data Not Available</label>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-content>

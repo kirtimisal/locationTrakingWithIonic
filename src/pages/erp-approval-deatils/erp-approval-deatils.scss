@@ -1,0 +1,204 @@
+.order-img{
+  margin: 1rem;
+  background: linear-gradient(180deg, #10cef3, #1af1c9) !important;
+}
+page-erp-approval-deatils {
+  ion-app.md [padding] {
+    padding: 0 16px;
+}
+    $num-of-tabs: 7;
+    @mixin tabs {
+        @for $i from 1 through $num-of-tabs {
+          &:nth-of-type(#{$i}) {
+            &.segment-activated {
+              ~ .slide {
+                left: calc((100% / #{$num-of-tabs}) * #{$i - 1});
+              }
+            }
+          }
+        }
+       }
+    
+       .SliderWrapper{
+        max-height: 140px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        background: $text-white;
+        height:50px;
+      }
+      button {
+      
+        display: inline-block;
+        font-size: 16px; /*reset font size*/
+      }
+      button:first-child {
+        margin-left: 10px; /*match space*/
+      }
+      button:last-child {
+        margin-right: 10px; /*match space*/
+      }
+    
+      ion-slides {
+        height: auto;
+      }
+    
+      .plain-bg{
+        background:none !important;
+        padding:0px; 
+        .toolbar-background-md {
+          background:none !important;
+        }
+    
+        .global-btn , .cancel-btn{
+          padding: 1.3em 2em !important;
+          width: 90%;
+          margin: 0.2rem;
+        }
+      }
+    
+    
+    .tabs-btn{
+      margin: 0 0.6rem;
+       color: $text-grey-dark;
+       padding:2rem 0.9em;
+     }
+  
+    .slide-zoom{
+      margin: 0 2rem 0 0;
+    }
+    
+    .card-wrapper{
+    text-align: center;
+    
+    .scroll-content{
+      margin-top: 100px !important;
+    }
+    
+    .even{
+      background: $text-white;
+      border-top: 1px solid #eee;
+      border-left: 4px solid  $blue-color;
+    }
+    
+    
+    .odd{
+      background: $text-white;
+      border-left: 4px solid  $green-color; 
+    }
+    
+    
+    }
+
+
+    .card-sec{
+      text-align: left;
+      color:  $text-grey-dark;
+      font-size: 1.4rem;
+      box-shadow: 0px 0px 10px #615f5f;
+      margin: 0rem 1rem;
+      margin-bottom: 1rem;
+      padding: 3px;
+     
+       
+      &:nth-child(even) {
+        background: $text-white;
+        border-left: 4px solid  $blue-color;
+    }
+    &:nth-child(odd) {
+        background: $text-white;
+        border-left: 4px solid  $green-color; 
+    }
+      .col{
+    padding:5px 5px 0px 5px !important;
+      }
+    .due-dt{
+      color: #e13838 !important;
+    }
+    
+    .item-nm {
+      label{
+        // color: #424242;
+        font-size: 1.5rem;
+      }
+
+      
+      .form-value{
+        color: rgb(25, 25, 25);
+        font-weight: 500;
+    }
+    }
+    
+    .other-item div{
+      font-size: 1.3rem;
+      color: $text-grey-dark;
+    }
+
+    // .NoRecordWarning{
+    //   color: #B9A247; font-size:17px; text-align:center;padding: 10px;
+    //  }
+   
+    }
+    
+    // -------------------------------------------------------
+      
+      #arrowR{
+      background:$bg-white;
+          width:20px;
+          height:25px;
+          float:right;
+          cursor:pointer;
+          ion-icon{
+            padding: 1.2rem 0.8rem;
+          }
+      }
+      
+      
+      #arrowL{
+      background:$bg-white;
+          width:20px;
+          height:25px;
+          float:left;
+          cursor:pointer;
+          ion-icon{
+            padding: 1.2rem 0.8rem;
+          }
+      }
+ .item-row{
+  border-bottom: 1px solid rgba(204, 204, 204, 0.72);
+  padding-bottom: 0.5rem;
+ }
+
+.activeButton{
+      background: $text-white !important;
+      box-shadow: none;
+      color: $secondary-color;
+      border-bottom: 2px solid $secondary-color;
+     }
+
+     .activeAmt{
+      background: #e4e4e4 !important;
+      box-shadow: none;
+      color: #101010;
+      font-weight: 700;
+        col{
+          padding:5px !important;
+        }
+     } 
+     .arrow-outer{
+      float: right;
+      font-weight: bold;
+      color: #fe2f65;
+     }
+
+    .toolbar-content-ios{
+background: #fff;
+     }
+     .NoRecordWarning{
+      color: #B9A247; font-size:17px; text-align:center; 
+      border-left: 4px solid #1af1c9;
+      padding: 10px;
+     }
+    
+
+}

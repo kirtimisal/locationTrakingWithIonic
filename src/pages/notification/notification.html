@@ -1,0 +1,102 @@
+<!--
+  Generated template for the NotificationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Notification</ion-title>
+    <ion-buttons (click)="openArchivedNotif()" end>
+      <button ion-button icon-only clear>
+        <ion-icon name="ios-archive-outline" class="text-white"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="notificationContent">
+  <ion-list>
+
+
+    <ion-card class="notif-items" *ngFor="let item of notificationList.notifDetails; let i=index">
+
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <label>Date :</label>
+            <span>
+              {{item.col6}}
+            </span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <label>Note :</label>
+            <span [innerHTML]="item.col5">
+            </span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <label>Created By :</label>
+            <span>
+              {{ item.col9 }}
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+
+
+      <ion-row class="footer-row" [ngClass]="{'footer-row-two-btn' : item.actionType=='NA'}">
+        <!-- <div class="menu-bottom"> -->
+        <ion-col class="msg-box text-center" *ngIf="item.isRead=='yes'">
+          <!-- <div class="msg-box"> -->
+          <button ion-button icon-left clear small (click)="markAsUnread(item,i)">
+            <ion-icon ios="ios-mail" md="ios-mail"></ion-icon>
+            <div>Unread</div>
+          </button>
+          <!-- </div> -->
+        </ion-col>
+
+        <ion-col class="msg-box text-center" *ngIf="item.isRead=='no'">
+          <!-- <div class="msg-box"> -->
+          <button ion-button icon-left clear small (click)="markAsRead(item,i)">
+            <ion-icon ios="ios-mail-open" md="ios-mail-open"></ion-icon>
+            <div> Read</div>
+          </button>
+          <!-- </div> -->
+        </ion-col>
+
+        <ion-col class="msg-box text-center" *ngIf="item.actionType!=='NA'">
+          <!-- <div class="msg-box"> -->
+          <button ion-button icon-left clear small (click)="open(item,i)">
+            <ion-icon ios="ios-open" md="md-open"></ion-icon>
+            <div>Open</div>
+          </button>
+          <!-- </div> -->
+        </ion-col>
+        <ion-col class="msg-box text-center">
+          <!-- <div class="msg-box"> -->
+          <button ion-button icon-left clear small (click)="archieveEntry(item,i)">
+            <ion-icon ios="ios-archive" md="md-archive"></ion-icon>
+            <div>Archieve</div>
+          </button>
+
+          <!-- </div> -->
+        </ion-col>
+
+        <!-- </div> -->
+
+      </ion-row>
+
+
+    </ion-card>
+    <!-- </ion-content> -->
+
+
+  </ion-list>
+</ion-content>

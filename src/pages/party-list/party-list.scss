@@ -1,0 +1,212 @@
+page-party-list {
+  
+    ion-app.md [padding] .scroll-content {
+        padding: 5px;
+    }
+.contentCard{
+    .label-md{
+        margin: 4px 10px !important;
+    }
+}
+
+    .item-icon-outer {
+        background: #FF5D3C;
+        height: 45px;
+        width: 45px;
+        padding: 1.4rem;
+        color: #fff;
+        text-align: center;
+        font-size: 1.8rem;
+    }
+    .item{
+        padding: 0px !important;
+    }
+    .emptyData{
+        padding: 40px;
+        text-align: center;
+    }
+    .emptyHeading{
+        font-size: 15px;
+        color: #adab55;
+    }
+    .party-listing {
+        h2 {
+            margin: 0 0 2px !important;
+            font-size: 1.5rem;
+            font-weight: 500;
+            white-space: normal !important;
+           
+        }
+        p{
+            overflow: inherit;
+            font-size: 1.4rem;
+            line-height: normal;
+            text-overflow: inherit;
+            color: #8e9093;
+            margin: 0 0 2px;
+            font-weight: 500;
+        }
+        ion-note{
+            font-size: 1rem;
+            align-self: flex-start;
+            color: #5d5d5d;
+            margin: 16px 8px 9px 0 !important;
+        }
+    }
+    .list .item-block .item-inner {
+        border-bottom: none;
+    }
+    .item {
+        border-bottom: 1px solid #dedede;
+    }
+
+
+    ion-item:nth-child(4n-6){
+        .item-icon-outer {
+            background: #10cef3 ;
+        }
+    } 
+
+    ion-item:nth-child(4n-5) {
+        .item-icon-outer {
+           background: #FE2D66;
+        }
+    }
+    ion-item:nth-child(4n-4) {
+        .item-icon-outer {
+            background: #14d8b4  !important;
+           
+        }
+    } 
+    .card-md-div{
+        border-radius: 20px;
+        
+        &:nth-child(even) {
+          background: $text-white;
+          border-left: 4px solid  $blue-color;
+          border-bottom: 2px solid  $green-color;
+        }
+      &:nth-child(odd) {
+          background: $text-white;
+          border-left: 4px solid  $green-color; 
+          border-bottom: 2px solid  $blue-color;
+          
+      }
+    }
+    .pin-icon{
+        color: $pink-color;
+    }
+    .w-100{
+        width:100%;
+        height: 27px;
+        padding: 0 1rem;
+        border: 1.4px solid #10cef3;
+    }
+    .search-section-btn{
+        @include global-gradient-secondary(90deg);
+        height: 27px;
+        padding: 0 15px;
+        color: $text-white;
+
+
+    }
+   
+
+   .search-gap{
+       height: 2rem;
+   }
+   .search-wrapper{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    top: 4rem;
+    /* height: 67px; */
+    background: #fff;
+    padding-top: 0.5rem;
+   }
+   .search-main-toolbar{
+       .toolbar-background-md{
+           background: $bg-white !important;
+       }
+   }
+   .search-main .toolbar-background-md{
+       background: #fff !important;
+   }
+   .party-code{
+       color: #0fb9da !important;
+   }
+   .ispinner .spinner {
+    stroke: #3aefcc;
+}
+.infinite-loading-text{
+    color: #ba5e5e;
+    font-size: 15.2px;
+}
+.scroll-content-padding
+.scroll-content{
+  padding: 0px !important;
+}
+.scroll-content-padding{
+  background: #f2f3f7;
+  margin-top: 16px;
+}
+.search-section-btn{
+    ion-icon{
+        font-size: 1.5em;
+    }
+}
+
+.list-ios > .item-block:first-child {
+    border-top: none;
+}
+.search-main{
+    padding: 0 16px;
+}
+.item-name-left{
+    vertical-align: -webkit-baseline-middle;
+    font-size: 1.6rem;;
+}
+.right-icon{
+    float:right;
+    margin: 0;
+    height: 3rem;
+    ion-icon{
+        color: #10cef3;
+        font-weight: bold;
+    }
+}
+.lov-name-filter{
+    font-size: 1.4rem;
+    color: #444;
+}
+.button-clear:hover:not(.disable-hover) {
+    background-color: transparent;
+}
+@include respond-to(medium-screens){
+    .search-section-btn {
+        padding: 0 17px;
+    }
+}
+@include respond-to(wide-screens){
+    .search-section-btn {
+        padding: 0 25px;
+    }
+}
+@include respond-to(tablet-screens){
+    .search-section-btn {
+        padding: 0 20px;
+    }
+}
+}
+
+.app-root-ios
+ {
+     .search-wrapper{
+         top: 6rem ;
+         z-index: 9;
+     }
+ }
+ 
+ 

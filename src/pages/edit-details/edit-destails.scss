@@ -1,0 +1,16 @@
+edit-details-page{
+
+    .item {
+        padding-left: 0.5rem !important;
+    }
+
+    @include respond-to(tablet-screens){
+
+    .content-ios{
+        .scroll-content{
+            margin-top: 64px !important;
+        }
+     }
+ 
+   }
+}

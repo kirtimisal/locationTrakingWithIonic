@@ -1,0 +1,116 @@
+<!--
+  Generated template for the EntryDetailsInTabularPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+
+        <ion-title>Entry Details</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div style="overflow-x: auto;">
+        <table class="populatedEntryFormTable">
+            <thead>
+                <tr>
+                    <th *ngFor="let data of tableHeader">{{data}}</th>
+
+                    <tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let list of tableData;let i = index;last as islast" [attr.data-index]="i">
+                    <td (click)="deleterow(i,list[list.length-1])" class="text-center">
+                        <ion-icon name="md-close-circle" class="close-ion"></ion-icon>
+
+                    </td>
+                    <ng-container *ngFor="let item of list;let j = index;last as lastVal">
+                        <td *ngIf="!lastVal">
+                            <div [ngSwitch]="item_help_property[j]">
+                                <ion-item *ngSwitchCase="'L'" [hidden]="entry_by_user[j]=='F'">
+                                    <ion-input [(ngModel)]="list[j]" clearInput (click)="openLov(item.column_desc,item.column_name,item.dependent_row,item.dependent_row_logic, item.item_help_property)"
+                                        [readonly]="true" [required]="nullable[j]=='F'" [disabled]="(flagForEdit[list[list.length-1]]!=1 || entry_by_user[j]== 'R') && (entry_by_user[j]== 'R')"></ion-input>
+                                </ion-item>
+                                <div *ngSwitchCase="'T'" [hidden]="entry_by_user[j]=='F'">
+                                    <ion-label style="white-space: normal !important;" *ngIf="entry_by_user[j]=='R'">{{list[j]}}</ion-label>
+                                    <ion-input [(ngModel)]="list[j]" maxlength="column_size[j]" [required]="nullable[j]=='F'" *ngIf="entry_by_user[j]!= 'R'"></ion-input>
+                                </div>
+                                <div *ngSwitchCase="'A'" [hidden]="entry_by_user[j]=='F'">
+                                    <ion-textarea [(ngModel)]="list[j]" [required]="nullable[j]=='F'" maxlength="column_size[j]" [disabled]="(flagForEdit[list[list.length-1]]!=1 || entry_by_user[j]== 'R') && (entry_by_user[j]== 'R')"
+                                        [readonly]="entry_by_user[j]== 'R'"></ion-textarea>
+                                </div>
+
+                                <div *ngSwitchCase="'N'" [hidden]="entry_by_user[j]=='F'">
+                                    <div *ngIf="decimal_digit[j]>0">
+                                      <ion-input name="column_name[j]" type="number" pattern="pattern[j]"   [(ngModel)]="list[j]"
+                                      (ngModelChange)="rowWiseAutoCalculation(auto_calculation[j],equationCOL[j],tableData,list[list.length-1])"maxlength="{{item.column_size}}" [min]="from_value[j]"
+                                        [max]="to_value[j]" [readonly]="entry_by_user[j]=='R' " [required]="nullable[j]=='F' " #numberFieldname="ngModel"></ion-input>
+                                    </div>
+                                    <div *ngIf="decimal_digit[j]==0">
+                                        <ion-input  name="column_name[j]" type="number" onkeypress="return event.charCode != 46"  [(ngModel)]="list[j]"
+                                        maxlength="{{item.column_size}}" [min]="from_value[j]"
+                                        [max]="to_value[j]" [readonly]="entry_by_user[j]=='R' " [required]="nullable[j]=='F' " (ngModelChange)="rowWiseAutoCalculation(auto_calculation[j],equationCOL[j],tableData,list[list.length-1])"  #numberFieldname="ngModel"></ion-input>
+                                    </div>
+                                  </div>
+                        
+
+                                <ion-item *ngSwitchCase="'C'" [hidden]="entry_by_user[j]=='F'">
+                                    <ion-datetime displayFormat="DD-MM-YYYY" [required]="nullable[j]=='F'" min="from_value[j]" max="to_value[j]" [(ngModel)]="list[j]"></ion-datetime>
+                                </ion-item>
+
+                                <ion-item *ngSwitchCase="'DT'" [hidden]="item.entry_by_user=='F'">
+
+                                    <ion-datetime displayFormat="DD-MM-YYYY h:mm:s" min="from_value[j]" max="to_value[j]" [(ngModel)]="list[j]"></ion-datetime>
+                                </ion-item>
+                                <div *ngSwitchCase="'E'" [hidden]="entry_by_user[j]=='F'">
+                                    <ion-input type="email" pattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+                                        [required]="nullable[j]=='F'" [(ngModel)]="list[j]" [readonly]="entry_by_user[j]=='R' " maxlength="to_value[j]"
+                                        minlength="from_value[j]" (blur)="dependent_nullable_logic(item.value,item.column_name,item.dependent_column_name)"></ion-input>
+
+                                </div>
+
+                                <ion-item *ngSwitchCase="'H'" [hidden]="entry_by_user[j]=='F'">
+                                    <ion-select [(ngModel)]="list[j]" [required]="nullable[j]=='F' ">
+                                        <ion-option *ngFor="let option of dropdownVal[j]" value="{{option.code}}">{{option.name}}</ion-option>
+
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item *ngSwitchCase="'D'" [hidden]="entry_by_user[j]=='F'">
+                                    <ion-select [(ngModel)]="list[j]">
+                                        <ion-option *ngFor="let option of item.dropdownVal" value="{{option}}">{{option}}</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                            </div>
+
+                        </td>
+                    </ng-container>
+
+
+                </tr>
+                <tr *ngIf="summaryRow">
+                    <td *ngFor="let sum of summaryRow">{{sum}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ion-grid *ngIf="tableData">
+        <ion-row class="btn-outer">
+            <ion-col col-2></ion-col>
+            <ion-col col-4 *ngIf="typesForOrderPopulated!='PO'">
+                <button ion-button class="cancel-btn" (click)="cancelAddUpdateEntry()" round>Cancel</button>
+            </ion-col>
+            <ion-col col-4 *ngIf="typesForOrderPopulated=='PO'">
+                <button ion-button class="global-btn" round (click)="closePage()">Back</button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button class="save-btn" round (click)="addUpdatedEntry(tableData)">Save</button>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+</ion-content>
